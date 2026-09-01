@@ -1,0 +1,73 @@
+import { watchFile, unwatchFile } from "fs"
+import chalk from "chalk"
+import { fileURLToPath } from "url"
+import fs from "fs"
+
+global.botNumber = "" 
+
+global.owner = [
+["584242773183", "yosue </>", true],
+["51921826291"],
+["523328418129"],
+["5216242255295"],
+["573133374132"],
+["5491156178758"],
+["584248272650"],
+["51900373696"],
+["50498273976"],
+["584125877491", "dvwilker", true]
+]
+
+global.mods = []
+global.suittag = ["584242773183"] 
+global.prems = []
+
+
+global.libreria = "Baileys Multi Device"
+global.vs = "^1.3.2"
+global.nameqr = "ShadowBot"
+global.sessions = "Sessions/Principal"
+global.jadi = "Sessions/SubBot"
+global.MichiJadibts = false
+
+global.multiplier = 1
+global.botname = "BocchiTheRock-MD"
+global.textbot = "Shadow-BOT, yosue"
+global.dev = "BocchiTheRock-MD"
+global.author = "*BocchiTheRock-MD* © mᥲძᥱ ᥕі𝗍һ 𝙮𝙤𝙨𝙪𝙚"
+global.etiqueta = "© 𝙮𝙤𝙨𝙪𝙚 | 𝟤𝟢𝟤𝟧"
+global.currency = "¢ Pesos"
+global.michipg = "https://i.ibb.co/3NfYh9k/default-avatar.png"
+global.icono = "https://i.ibb.co/3NfYh9k/default-avatar.png"
+global.idcanal = "120363403739366547@newsletter"
+global.idcanal2 = "120363403739366547@newsletter"
+global.banner = "https://i.ibb.co/3NfYh9k/default-avatar.png"
+global.catalogo = fs.readFileSync('./lib/catalogo.jpg')
+
+
+global.group = "https://chat.whatsapp.com/D80dadzwRq4LQqFGUntZfK?mode=ems_copy_t"
+global.community = "https://chat.whatsapp.com/KCIXMcV2YO9ElYbbmbAeo1"
+global.channel = "https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O"
+global.github = "https://github.com"
+global.gmail = "minexdt@gmail.com"
+global.ch = {
+ch1: "120363293893278236@newsletter"
+}
+
+
+global.APIs = {
+vreden: { url: "https://api.vreden.web.id", key: null },
+delirius: { url: "https://api.delirius.store", key: null },
+zenzxz: { url: "https://api.zenzxz.my.id", key: null },
+siputzx: { url: "https://api.siputzx.my.id", key: null },
+adonix: { url: "https://api-adonix.ultraplus.click", key: null },
+gohan: { url: "https://api-gohan-v1.onrender.com", key: null }
+}
+
+
+let file = fileURLToPath(import.meta.url)
+watchFile(file, () => {
+unwatchFile(file)
+console.log(chalk.redBright("Update 'settings.js'"))
+import(`${file}?update=${Date.now()}`)
+})

@@ -1,0 +1,9 @@
+/Sessions
+/node_modules
+package-lock.json
+bot.log
+
+database.json
+error.log
+*.log
+tmp/

@@ -1,0 +1,102 @@
+import axios from 'axios'
+import { generateWAMessageContent, generateWAMessageFromContent, proto } from '@whiskeysockets/baileys'
+
+const newsletterJid  = '120363403739366547@newsletter'
+const newsletterName = '👑 BocchiTheRock-MD uwu👑 '
+
+const packname = '👑 BocchiTheRock-MD 👑'
+const dev = 'Creado por Yosue'
+const redes = 'https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O'
+const icons = 'https://files.catbox.moe/6bgv7s.jpg'
+
+let handler = async (m, { conn, usedPrefix, command }) => {
+  try {
+    const contextInfo = {
+      mentionedJid: [m.sender],
+      isForwarded: true,
+      forwardingScore: 999,
+      forwardedNewsletterMessageInfo: {
+        newsletterJid,
+        newsletterName,
+        serverMessageId: -1
+      },
+      externalAdReply: {
+        title: packname,
+        body: dev,
+        thumbnailUrl: icons,
+        sourceUrl: redes,
+        mediaType: 1,
+        renderLargerThumbnail: true
+      }
+    }
+
+    await m.react('❤️')
+    await conn.reply(m.chat, '🌌 *Buscando una waifu hermosa para ti...*', m, { contextInfo })
+
+    const res = await axios.get('https://nekos.best/api/v2/waifu', { timeout: 10000 })
+    if (!res.data?.results?.[0]?.url) throw new Error('La API no devolvió una imagen válida.')
+
+    let url = res.data.results[0].url
+
+    const imgRes = await axios.get(url, { responseType: 'arraybuffer', timeout: 10000 })
+    const buffer = Buffer.from(imgRes.data)
+
+    const { imageMessage } = await generateWAMessageContent({ image: buffer }, { upload: conn.waUploadToServer })
+    if (!imageMessage) throw new Error('No se pudo generar el componente de la imagen.')
+
+    const caption = `🌌 *Aquí tienes tu waifu, ${await conn.getName(m.sender)}* 👑\n\n💫 ¿Quieres otra? Solo toca el botón de abajo.`
+
+    const messageContent = generateWAMessageFromContent(
+      m.chat,
+      {
+        viewOnceMessage: {
+          message: {
+            interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+              body: proto.Message.InteractiveMessage.Body.create({ text: caption }),
+              footer: proto.Message.InteractiveMessage.Footer.create({ text: '👑 SHADOW BOT MD' }),
+              header: proto.Message.InteractiveMessage.Header.create({
+                title: 'Shadow Waifus',
+                hasMediaAttachment: true,
+                imageMessage
+              }),
+              nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
+                buttons: [
+                  {
+                    name: 'quick_reply',
+                    buttonParamsJson: JSON.stringify({
+                      display_text: '🔁 Siguiente waifu',
+                      id: `${usedPrefix}${command}`
+                    })
+                  },
+                  {
+                    name: 'cta_url',
+                    buttonParamsJson: JSON.stringify({
+                      display_text: '🌐 Canal de Shadow',
+                      url: redes
+                    })
+                  }
+                ]
+              })
+            })
+          }
+        }
+      },
+      { quoted: m, contextInfo }
+    )
+
+    await conn.relayMessage(m.chat, messageContent.message, { messageId: messageContent.key.id })
+    await m.react('✅')
+
+  } catch (e) {
+    await conn.reply(m.chat, `❌ Error al procesar el comando.\n> Detalles: ${e.message}`, m)
+    await m.react('⚠️')
+  }
+}
+
+handler.help = ['waifu']
+handler.tags = ['anime']
+handler.command = ['waifu']
+handler.group = true
+handler.register = true
+
+export default handler

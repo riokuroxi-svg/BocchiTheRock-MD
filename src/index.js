@@ -1,0 +1,820 @@
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1'
+import './settings.js'
+import '../plugins/_fakes.js'
+import cfonts from 'cfonts'
+import { createRequire } from 'module'
+import { fileURLToPath, pathToFileURL } from 'url'
+import { platform } from 'process'
+import * as ws from 'ws'
+import fs, { readdirSync, statSync, unlinkSync, existsSync, mkdirSync, readFileSync, rmSync, watch } from 'fs'
+import yargs from 'yargs'
+import { spawn, execSync } from 'child_process'
+import lodash from 'lodash'
+import { MichiJadiBot } from '../plugins/subs-conexion.js'
+import chalk from 'chalk'
+import syntaxerror from 'syntax-error'
+import { tmpdir } from 'os'
+import os from 'os'
+import { format } from 'util'
+import boxen from 'boxen'
+import pino from 'pino'
+import Pino from 'pino'
+import path, { join, dirname } from 'path'
+import { Boom } from '@hapi/boom'
+import { makeWASocket, protoType, serialize } from '../lib/simple.js'
+import { Low, JSONFile } from 'lowdb'
+import { mongoDB, mongoDBV2 } from '../lib/mongoDB.js'
+import store from '../lib/store.js'
+import { proto } from '@whiskeysockets/baileys'
+import pkg from 'google-libphonenumber'
+const { PhoneNumberUtil } = pkg
+const phoneUtil = PhoneNumberUtil.getInstance()
+const { Browsers, DisconnectReason, useMultiFileAuthState, MessageRetryMap, fetchLatestBaileysVersion, makeCacheableSignalKeyStore, jidNormalizedUser } = await import('@whiskeysockets/baileys')
+import readline, { createInterface } from 'readline'
+import NodeCache from 'node-cache'
+const { CONNECTING } = ws
+const { chain } = lodash
+const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+// During manual linking, keep one socket and one issued code. Replacing the
+// socket invalidates the code before the user can enter it in WhatsApp.
+const pairingRetryLimit = 20
+const pairingRetryDelay = 5000
+
+let { say } = cfonts
+
+function showStartupDesign() {
+  console.clear()
+  say('ShadowBot', {
+    font: 'block',
+    align: 'center',
+    colors: ['cyan', 'magenta'],
+    background: 'transparent',
+    letterSpacing: 1,
+    lineHeight: 1,
+    space: true,
+  })
+  say(`BocchiTheRock-MD  •  v${global.vs?.replace('^', '') || '1.3.2'}`, {
+    font: 'console',
+    align: 'center',
+    colors: ['magenta', 'cyan'],
+  })
+  console.log('\n' + boxen(
+    chalk.cyanBright.bold('  ✦ Sistema listo para iniciar ✦\n\n') +
+    chalk.white('  Bot          ') + chalk.magenta('ShadowBot\n') +
+    chalk.white('  Plataforma   ') + chalk.magenta('WhatsApp Multi-Device\n') +
+    chalk.white('  Node.js      ') + chalk.magenta(process.version),
+    {
+      padding: { top: 0, bottom: 1, left: 2, right: 3 },
+      margin: { left: 2, right: 2 },
+      borderStyle: 'double',
+      borderColor: 'cyan',
+      title: chalk.cyan.bold(' ✦ BocchiTheRock-MD ✦ '),
+      titleAlignment: 'center',
+    }
+  ) + '\n')
+}
+
+function showLoginMenu() {
+  console.log(boxen(
+    chalk.yellowBright.bold('  Selecciona el método de inicio:\n\n') +
+    chalk.green.bold('  1') + chalk.white('  ➜ Código QR             ') + chalk.gray('(escanea con la cámara)\n') +
+    chalk.cyan.bold('  2') + chalk.white('  ➜ Código de 8 dígitos   ') + chalk.gray('(vincula con tu número)'),
+    {
+      padding: 1,
+      margin: { left: 2, right: 2 },
+      borderStyle: 'round',
+      borderColor: 'magenta',
+      title: chalk.magenta.bold(' 🚀 INICIO DE SESIÓN '),
+      titleAlignment: 'center',
+    }
+  ) + '\n')
+}
+
+showStartupDesign()
+protoType()
+serialize()
+
+fs.mkdirSync('tmp', { recursive: true });
+global.__filename = function filename(pathURL = import.meta.url, rmPrefix = platform !== 'win32') {
+return rmPrefix ? /file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : pathToFileURL(pathURL).toString();
+}; global.__dirname = function dirname(pathURL) {
+return path.dirname(global.__filename(pathURL, true))
+}; global.__require = function require(dir = import.meta.url) {
+return createRequire(dir)
+}
+
+global.timestamp = {start: new Date}
+const __dirname = global.__dirname(import.meta.url)
+global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
+global.prefix = new RegExp('^[#!./]')
+
+global.db = new Low(/https?:\/\//.test(opts['db'] || '') ? new cloudDBAdapter(opts['db']) : new JSONFile('database.json'))
+global.DATABASE = global.db; 
+global.loadDatabase = async function loadDatabase() {
+if (global.db.READ) {
+return new Promise((resolve) => setInterval(async function() {
+if (!global.db.READ) {
+clearInterval(this);
+resolve(global.db.data == null ? global.loadDatabase() : global.db.data)
+}}, 1 * 1000))
+}
+if (global.db.data !== null) return
+global.db.READ = true
+await global.db.read().catch(console.error)
+global.db.READ = null
+global.db.data = {
+users: {},
+chats: {},
+stats: {},
+msgs: {},
+sticker: {},
+settings: {},
+...(global.db.data || {}),
+}
+global.db.chain = chain(global.db.data)
+}
+loadDatabase()
+
+// An interrupted pairing attempt leaves a creds.json with registered=false.
+// Treat it as no session so the next start shows the pairing menu instead of
+// endlessly reconnecting with an invalid authentication state.
+const sessionCredsPath = join(global.sessions, 'creds.json')
+if (existsSync(sessionCredsPath)) {
+try {
+const sessionCreds = JSON.parse(readFileSync(sessionCredsPath, 'utf8'))
+if (sessionCreds?.registered !== true) {
+rmSync(global.sessions, { recursive: true, force: true })
+console.log(chalk.yellowBright('\n⚠ Sesión de vinculación incompleta eliminada. Iniciando una nueva vinculación...\n'))
+}
+} catch {
+rmSync(global.sessions, { recursive: true, force: true })
+}
+}
+
+const {state, saveState, saveCreds} = await useMultiFileAuthState(global.sessions)
+let currentBaileysVersion
+try {
+const latestBaileys = await fetchLatestBaileysVersion()
+currentBaileysVersion = latestBaileys.version
+console.log(chalk.gray(`[ Baileys ] Versión Web: ${currentBaileysVersion.join('.')}`))
+} catch (error) {
+console.log(chalk.gray(`[ Baileys ] Usando versión integrada: ${error.message}`))
+}
+const msgRetryCounterMap = new Map()
+const msgRetryCounterCache = new NodeCache({ stdTTL: 0, checkperiod: 0 })
+const userDevicesCache = new NodeCache({ stdTTL: 0, checkperiod: 0 })
+let phoneNumber = process.env.BOT_NUMBER || process.env.PHONE_NUMBER || global.botNumber
+const methodCodeQR = process.argv.includes("qr") || process.argv.includes("--qr")
+const methodCode = process.argv.includes("code") || process.argv.includes("--code")
+const MethodMobile = process.argv.includes("mobile") || process.argv.includes("--mobile")
+const colors = chalk.bold.white
+const qrOption = chalk.blueBright
+const textOption = chalk.cyan
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
+const question = (texto) => new Promise((resolver) => rl.question(texto, resolver))
+let opcion
+if (methodCodeQR) {
+opcion = '1'
+}
+if (!methodCodeQR && !methodCode && !fs.existsSync(`./${sessions}/creds.json`)) {
+ showLoginMenu()
+do {
+opcion = await question(chalk.magentaBright('  ➤ Opción [1/2]: '))
+if (!/^[1-2]$/.test(opcion)) {
+console.log(chalk.bold.redBright(`No se permiten numeros que no sean 1 o 2, tampoco letras o símbolos especiales.`))
+}} while (opcion !== '1' && opcion !== '2' || fs.existsSync(`./${sessions}/creds.json`))
+} 
+
+console.info = () => { }
+
+const connectionOptions = {
+logger: pino({ level: 'silent' }),
+printQRInTerminal: opcion == '1' ? true : methodCodeQR ? true : false,
+mobile: MethodMobile, 
+browser: ['Ubuntu', 'Chrome', '20.0.04'],
+...(currentBaileysVersion ? { version: currentBaileysVersion } : {}),
+auth: {
+creds: state.creds,
+keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
+},
+ // Keeping the socket offline while pairing avoids WhatsApp closing the
+ // unauthenticated channel before the pairing request is accepted.
+ markOnlineOnConnect: false,
+generateHighQualityLinkPreview: true, 
+syncFullHistory: false,
+getMessage: async (key) => {
+try {
+let jid = jidNormalizedUser(key.remoteJid);
+let msg = await store.loadMessage(jid, key.id)
+return msg?.message || ""
+} catch (error) {
+return ""
+}},
+msgRetryCounterCache: msgRetryCounterCache || new Map(),
+userDevicesCache: userDevicesCache || new Map(),
+defaultQueryTimeoutMs: undefined,
+cachedGroupMetadata: (jid) => globalThis.conn?.chats?.[jid]?.metadata ?? {},
+keepAliveIntervalMs: 45000, 
+maxIdleTimeMs: 120000, 
+}
+
+let reloadHandlerImpl
+global.reloadHandler = async (...args) => {
+while (!reloadHandlerImpl) await delay(100)
+return reloadHandlerImpl(...args)
+}
+
+function resetPairingState() {
+delete state.creds.me
+delete state.creds.pairingCode
+delete state.creds.pairingEphemeralKeyPair
+global._pairingCodeIssued = false
+global._pairingRequestStarted = false
+global._pairingCodePromise = null
+global._pairingRequested = false
+}
+
+async function requestPairingCodeOnce() {
+if (global._pairingCodePromise) return global._pairingCodePromise
+global._pairingCodePromise = (async () => {
+global._pairingRequestStarted = true
+global._pairingRequested = true
+console.log(chalk.cyanBright(`\n📱 Solicitando código de vinculación para +${global._pairingNumber}...`))
+for (let attempt = 0; attempt < 30; attempt++) {
+try {
+ if (state.creds.registered || global.conn?.user?.id || global._pairingCodeIssued) return
+let codeBot = await global.conn.requestPairingCode(global._pairingNumber)
+codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot
+global._pairingCodeIssued = true
+ console.log('\n' + boxen(
+   chalk.magentaBright.bold('  ✦ CÓDIGO DE VINCULACIÓN ✦\n\n') +
+   chalk.white('  Ingresa este código en WhatsApp:\n\n') +
+   chalk.bgMagenta.white.bold(`       ${codeBot}       `) +
+     chalk.gray('\n\n  Si WhatsApp cierra el canal, se generará otro código.'),
+   {
+     padding: { top: 0, bottom: 1, left: 2, right: 3 },
+     margin: { left: 2, right: 2 },
+     borderStyle: 'double',
+     borderColor: 'magenta',
+     title: chalk.magenta.bold(' 🔐 BocchiTheRock-MD '),
+     titleAlignment: 'center',
+   }
+ ) + '\n')
+return
+} catch (e) {
+if (attempt === 29) {
+console.log(chalk.bold.redBright(`\n⚠︎ WhatsApp no pudo entregar el código: ${e.message}`))
+return
+}
+await delay(2000)
+}
+}
+})()
+return global._pairingCodePromise
+}
+
+async function requestPairingCodeWhenSocketIsReady() {
+ for (let attempt = 0; attempt < 150; attempt++) {
+ const socket = global.conn?.ws
+ const readyState = socket?.readyState
+ const socketIsOpen = socket?.isOpen === true || readyState === 1
+ const socketIsClosed = socket?.isClosed === true || socket?.isClosing === true || readyState === 3
+ if (socketIsOpen) {
+return requestPairingCodeOnce()
+}
+ if (socketIsClosed) return
+await delay(100)
+}
+console.log(chalk.yellowBright('\n⚠︎ El canal de WhatsApp no estuvo listo para solicitar el código.'))
+}
+
+if (!state.creds.registered) {
+if (opcion === '2' || methodCode) {
+opcion = '2'
+if (methodCode && !!phoneNumber) {
+global._pairingNumber = phoneNumber.replace(/[^0-9]/g, '')
+} else {
+do {
+phoneNumber = await question(chalk.bgBlack(chalk.bold.greenBright(`[ 🍂 ]  Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.magentaBright('---> ')}`)))
+phoneNumber = phoneNumber.replace(/\D/g,'')
+if (!phoneNumber.startsWith('+')) {
+phoneNumber = `+${phoneNumber}`
+}} while (!await isValidPhoneNumber(phoneNumber))
+rl.close()
+global._pairingNumber = phoneNumber.replace(/\D/g, '')
+}
+}}
+
+// Create the WhatsApp socket only after the pairing choice and phone number
+// are known. Creating it before readline finishes lets WhatsApp close the
+// unauthenticated channel before a pairing request can be sent.
+global.conn = makeWASocket(connectionOptions)
+try { conn.ev.on('connection.update', connectionUpdate.bind(global.conn)) } catch {}
+conn.ev.on('creds.update', saveCreds)
+global._reconnectAttempts = 0
+global._pairingCodeIssued = false
+global._pairingRequestStarted = false
+global._pairingReconnectScheduled = false
+global._pairingCodePromise = null
+global._pairingCloseNoticeShown = false
+conn.isInit = false
+conn.well = false
+conn.logger.info(`[ 🍐 ]  H E C H O\n`)
+if (!opts['test']) {
+if (global.db) setInterval(async () => {
+if (global.db.data) await global.db.write()
+if (opts['autocleartmp'] && (global.support || {}).find) (tmp = [os.tmpdir(), 'tmp', `${jadi}`], tmp.forEach((filename) => cp.spawn('find', [filename, '-amin', '3', '-type', 'f', '-delete'])))
+}, 30 * 1000)
+}
+
+const lidCache = global.__shadowLidCache || (global.__shadowLidCache = new Map())
+
+async function resolveLidToRealJid(lidJid, groupJid, maxRetries = 3, retryDelay = 1000) {
+if (!lidJid?.endsWith("@lid") || !groupJid?.endsWith("@g.us")) return lidJid?.includes("@") ? lidJid : `${lidJid}@s.whatsapp.net`
+const cached = lidCache.get(lidJid);
+if (cached) return cached;
+const lidToFind = lidJid.split("@")[0];
+let attempts = 0
+while (attempts < maxRetries) {
+try {
+const metadata = await conn.groupMetadata(groupJid)
+if (!metadata?.participants) throw new Error("No se obtuvieron participantes")
+for (const participant of metadata.participants) {
+try {
+const participantJid = participant.phoneNumber || participant.jid || participant.id
+if (!participantJid) continue
+if (participant.lid?.split('@')[0] === lidToFind && participant.phoneNumber) {
+lidCache.set(lidJid, participant.phoneNumber)
+return participant.phoneNumber
+}
+const contactDetails = await conn.onWhatsApp(participantJid)
+if (!contactDetails?.[0]?.lid) continue
+const possibleLid = contactDetails[0].lid.split("@")[0]
+if (possibleLid === lidToFind) {
+lidCache.set(lidJid, participantJid)
+return participantJid
+}} catch (e) {
+continue
+}}
+lidCache.set(lidJid, lidJid)
+return lidJid
+} catch (e) {
+attempts++
+if (attempts >= maxRetries) {
+lidCache.set(lidJid, lidJid)
+return lidJid
+}
+await new Promise(resolve => setTimeout(resolve, retryDelay))
+}}
+return lidJid
+}
+
+async function extractAndProcessLids(text, groupJid) {
+if (!text) return text
+const lidMatches = text.match(/\d+@lid/g) || []
+let processedText = text
+for (const lid of lidMatches) {
+try {
+const realJid = await resolveLidToRealJid(lid, groupJid);
+processedText = processedText.replace(new RegExp(lid, 'g'), realJid)
+} catch (e) {
+console.error(`Error procesando LID ${lid}:`, e)
+}}
+return processedText
+}
+
+async function processLidsInMessage(message, groupJid) {
+if (!message || !message.key) return message
+try {
+const messageCopy = {
+key: {...message.key},
+message: message.message ? {...message.message} : undefined,
+...(message.quoted && {quoted: {...message.quoted}}),
+...(message.mentionedJid && {mentionedJid: [...message.mentionedJid]})
+}
+const remoteJid = messageCopy.key.remoteJid || groupJid
+if (messageCopy.key?.participant?.endsWith('@lid')) { messageCopy.key.participant = await resolveLidToRealJid(messageCopy.key.participant, remoteJid) }
+if (messageCopy.message?.extendedTextMessage?.contextInfo?.participant?.endsWith('@lid')) { messageCopy.message.extendedTextMessage.contextInfo.participant = await resolveLidToRealJid( messageCopy.message.extendedTextMessage.contextInfo.participant, remoteJid ) }
+if (messageCopy.message?.extendedTextMessage?.contextInfo?.mentionedJid) {
+const mentionedJid = messageCopy.message.extendedTextMessage.contextInfo.mentionedJid
+if (Array.isArray(mentionedJid)) {
+for (let i = 0; i < mentionedJid.length; i++) {
+if (mentionedJid[i]?.endsWith('@lid')) {
+mentionedJid[i] = await resolveLidToRealJid(mentionedJid[i], remoteJid)
+}}}}
+if (messageCopy.message?.extendedTextMessage?.contextInfo?.quotedMessage?.extendedTextMessage?.contextInfo?.mentionedJid) {
+const quotedMentionedJid = messageCopy.message.extendedTextMessage.contextInfo.quotedMessage.extendedTextMessage.contextInfo.mentionedJid;
+if (Array.isArray(quotedMentionedJid)) {
+for (let i = 0; i < quotedMentionedJid.length; i++) {
+if (quotedMentionedJid[i]?.endsWith('@lid')) {
+quotedMentionedJid[i] = await resolveLidToRealJid(quotedMentionedJid[i], remoteJid)
+}}}}
+if (messageCopy.message?.conversation) { messageCopy.message.conversation = await extractAndProcessLids(messageCopy.message.conversation, remoteJid) }
+if (messageCopy.message?.extendedTextMessage?.text) { messageCopy.message.extendedTextMessage.text = await extractAndProcessLids(messageCopy.message.extendedTextMessage.text, remoteJid) }
+if (messageCopy.message?.extendedTextMessage?.contextInfo?.participant && !messageCopy.quoted) {
+const quotedSender = await resolveLidToRealJid( messageCopy.message.extendedTextMessage.contextInfo.participant, remoteJid );
+messageCopy.quoted = { sender: quotedSender, message: messageCopy.message.extendedTextMessage.contextInfo.quotedMessage }
+}
+return messageCopy
+} catch (e) {
+console.error('Error en processLidsInMessage:', e)
+return message
+}}
+
+async function connectionUpdate(update) {
+const {connection, lastDisconnect, isNewLogin, qr} = update
+global.stopped = connection
+if (isNewLogin) conn.isInit = true
+if (global.db.data == null) loadDatabase()
+// Baileys emits `qr` after the WebSocket has completed its initial
+// handshake. Requesting the pairing code here matches the stable flow used
+// by the reference bot and avoids sending the request during `connecting`.
+if (qr && !state.creds.registered && (opcion === '2' || methodCode) && global._pairingNumber && !global._pairingCodeIssued && !global._pairingRequestStarted) {
+  void requestPairingCodeOnce().catch(error => {
+    console.log(chalk.redBright(`\n⚠︎ No se pudo solicitar el código: ${error.message}`))
+  })
+}
+if (update.qr != 0 && update.qr != undefined || methodCodeQR) {
+if (opcion == '1' || methodCodeQR) {
+console.log(chalk.green.bold(`[ ✿ ]  Escanea este código QR`))}
+}
+ if (connection === "open") {
+if (conn.user?.id) {
+global._pairingRetries = 0
+const userJid = jidNormalizedUser(conn.user.id)
+const userName = conn.user.name || conn.user.verifiedName || "Desconocido"
+await joinChannels(conn)
+  const number = conn.user.id?.split(':')[0]?.split('@')[0] || '—'
+  console.log('\n' + boxen(
+    chalk.greenBright.bold('  ✦ BOT CONECTADO EXITOSAMENTE ✦\n\n') +
+    chalk.white('  🤖 Bot        ') + chalk.cyan('ShadowBot\n') +
+    chalk.white('  👤 Cuenta     ') + chalk.cyan(userName) + '\n' +
+    chalk.white('  📱 Número     ') + chalk.cyan(number) + '\n' +
+    chalk.white('  🟢 Node.js    ') + chalk.cyan(process.version) + '\n' +
+    chalk.white('  🖥️  Sistema    ') + chalk.cyan(os.platform()),
+    {
+      padding: { top: 0, bottom: 1, left: 2, right: 3 },
+      margin: { left: 2, right: 2 },
+      borderStyle: 'double',
+      borderColor: 'green',
+      title: chalk.green.bold(' ✦ WhatsApp Online ✦ '),
+      titleAlignment: 'center',
+    }
+  ) + '\n')
+}}
+let reason = new Boom(lastDisconnect?.error)?.output?.statusCode
+if (connection === 'close') {
+    const isAuthenticated = !!(conn?.user?.id)
+    const manualPairing = (opcion === '2' || methodCode) && !state.creds.registered
+    if (manualPairing) {
+        // Diagnostic: show the real close reason WhatsApp sent, so we know
+        // whether this is a code/version issue (401/428/515) vs a network/IP
+        // issue (ECONNRESET, timeout, no statusCode at all).
+        console.log(chalk.bold.redBright(`\n[DEBUG] Motivo de cierre -> código: ${reason || 'sin código'} | mensaje: ${lastDisconnect?.error?.message || 'sin mensaje'}`))
+        if (global._pairingCodeIssued && !global._pairingCloseNoticeShown) {
+            global._pairingCloseNoticeShown = true
+            console.log(chalk.bold.yellowBright(`\n⚠︎ WhatsApp cerró el canal (428). Se generará un código nuevo...`))
+        } else if (!global._pairingCodeIssued && !global._pairingCloseNoticeShown) {
+            global._pairingCloseNoticeShown = true
+            console.log(chalk.bold.yellowBright(`\n⚠︎ WhatsApp cerró el canal antes de entregar el código. Reintentando...`))
+        }
+        if (reason === DisconnectReason.loggedOut || reason === 401) {
+            resetPairingState()
+        }
+        if ((global._pairingRetries || 0) >= pairingRetryLimit) return
+        if (global._pairingReconnectScheduled) return
+        global._pairingRetries = (global._pairingRetries || 0) + 1
+        global._pairingReconnectScheduled = true
+        setTimeout(async () => {
+          global._pairingReconnectScheduled = false
+          global._pairingCloseNoticeShown = false
+          global._pairingCodeIssued = false
+          global._pairingRequested = false
+          global._pairingRequestStarted = false
+          global._pairingCodePromise = null
+          await global.reloadHandler(true).catch(console.error)
+        }, global._pairingCodeIssued ? pairingRetryDelay : 3000)
+        return
+    }
+    if (reason === DisconnectReason.badSession) {
+console.log(chalk.bold.cyanBright(`\n⚠︎ Sesión incorrecta, borra la session principal del Bot, y conectate nuevamente.`))
+} else if (reason === DisconnectReason.connectionClosed) {
+if (!isAuthenticated) {
+if (opcion === '2' || methodCode) {
+if ((global._pairingRetries || 0) >= pairingRetryLimit) return
+global._pairingRetries = (global._pairingRetries || 0) + 1
+console.log(chalk.bold.magentaBright(`\n♻ Reconectando (${global._pairingRetries}/${pairingRetryLimit})...`))
+await delay(pairingRetryDelay)
+await global.reloadHandler(true).catch(console.error)
+}
+return
+}
+console.log(chalk.bold.magentaBright(`\n♻ Reconectando la conexión del Bot...`))
+await delay(3000)
+await global.reloadHandler(true).catch(console.error)
+} else if (reason === DisconnectReason.connectionLost) {
+if (!isAuthenticated) {
+if (opcion === '2' || methodCode) {
+if ((global._pairingRetries || 0) >= pairingRetryLimit) return
+global._pairingRetries = (global._pairingRetries || 0) + 1
+await delay(pairingRetryDelay)
+await global.reloadHandler(true).catch(console.error)
+}
+return
+}
+console.log(chalk.bold.blueBright(`\n⚠︎ Conexión perdida con el servidor, reconectando el Bot...`))
+await delay(3000)
+await global.reloadHandler(true).catch(console.error)
+    } else if (reason === DisconnectReason.connectionReplaced) {
+        console.log(chalk.bold.yellowBright(`\nꕥ La conexión del Bot ha sido reemplazada, intentando reconectar...`))
+        await delay(5000)
+        await global.reloadHandler(true).catch(console.error)
+    } else if (reason === DisconnectReason.loggedOut) {
+        if (!isAuthenticated) {
+            if ((global._pairingRetries || 0) >= pairingRetryLimit) return
+            global._pairingRetries = (global._pairingRetries || 0) + 1
+            // A pairing socket can be closed by WhatsApp after issuing a
+            // code. Reconnect immediately and let the new socket issue a
+            // fresh code instead of leaving the user waiting 30 seconds.
+            global._pairingRequested = false
+            console.log(chalk.bold.yellowBright(`\n⚠︎ Sesión de vinculación cerrada. Nuevo intento en ${pairingRetryDelay / 1000}s (${global._pairingRetries}/${pairingRetryLimit})...`))
+            await delay(pairingRetryDelay)
+            await global.reloadHandler(true).catch(console.error)
+            return
+        }
+        console.log(chalk.bold.redBright(`\n⚠︎ Sesión cerrada, intentando reconectar con nueva autenticación...`))
+        await delay(5000)
+        await global.reloadHandler(true).catch(console.error)
+} else if (reason === DisconnectReason.restartRequired) {
+if (!isAuthenticated) {
+if (opcion === '2' || methodCode) {
+if ((global._pairingRetries || 0) >= pairingRetryLimit) return
+global._pairingRetries = (global._pairingRetries || 0) + 1
+await delay(pairingRetryDelay)
+await global.reloadHandler(true).catch(console.error)
+}
+return
+}
+console.log(chalk.bold.cyanBright(`\n♻ Conectando el Bot con el servidor...`))
+await delay(3000)
+await global.reloadHandler(true).catch(console.error)
+} else if (reason === DisconnectReason.timedOut) {
+if (!isAuthenticated) {
+if (opcion === '2' || methodCode) {
+if ((global._pairingRetries || 0) >= pairingRetryLimit) return
+global._pairingRetries = (global._pairingRetries || 0) + 1
+await delay(pairingRetryDelay)
+await global.reloadHandler(true).catch(console.error)
+}
+return
+}
+console.log(chalk.bold.yellowBright(`\n♻ Conexión agotada, reconectando el Bot...`))
+await delay(5000)
+await global.reloadHandler(true).catch(console.error)
+    } else {
+        if (!isAuthenticated) {
+if (opcion === '2' || methodCode) {
+if ((global._pairingRetries || 0) >= pairingRetryLimit) return
+global._pairingRetries = (global._pairingRetries || 0) + 1
+await delay(pairingRetryDelay)
+await global.reloadHandler(true).catch(console.error)
+}
+return
+}
+        global._reconnectAttempts = (global._reconnectAttempts || 0) + 1
+        const backoff = Math.min(3000 * Math.pow(2, global._reconnectAttempts - 1), 60000)
+        console.log(chalk.bold.redBright(`\n⚠︎ Conexión cerrada (razón: ${reason}), reconectando en ${Math.round(backoff/1000)}s...`))
+        await delay(backoff)
+        await global.reloadHandler(true).catch(console.error)
+        if (connection === 'open') global._reconnectAttempts = 0
+    }}}
+process.on('uncaughtException', console.error)
+process.on('unhandledRejection', (err) => {
+if (err?.message?.includes('Connection Closed') || err?.message?.includes('not opened')) return
+console.error(err)
+})
+let isInit = true
+let handler = await import('./handler.js')
+global._reloading = false
+reloadHandlerImpl = async function(restatConn) {
+if (global._reloading) return
+global._reloading = true
+try {
+const Handler = await import(`./handler.js?update=${Date.now()}`).catch(console.error);
+if (Object.keys(Handler || {}).length) handler = Handler
+} catch (e) {
+console.error(e);
+}
+try {
+    if (restatConn) {
+        const oldChats = global.conn.chats
+        try {
+            conn.ev.removeAllListeners('connection.update')
+            global.conn.ws.close()
+            await delay(2000)
+        } catch { }
+        conn.ev.removeAllListeners()
+        const newConn = makeWASocket(connectionOptions, {chats: oldChats})
+        global.conn = newConn
+        isInit = true
+    }
+if (!isInit) {
+conn.ev.off('messages.upsert', conn.handler)
+conn.ev.off('connection.update', conn.connectionUpdate)
+conn.ev.off('creds.update', conn.credsUpdate)
+}
+conn.handler = handler.handler.bind(global.conn)
+conn.connectionUpdate = connectionUpdate.bind(global.conn)
+conn.credsUpdate = saveCreds.bind(global.conn, true)
+conn.ev.on('messages.upsert', conn.handler)
+conn.ev.on('connection.update', conn.connectionUpdate)
+conn.ev.on('creds.update', conn.credsUpdate)
+isInit = false
+} catch (e) {
+console.error('Error en reloadHandler:', e)
+} finally {
+global._reloading = false
+}
+return true
+}
+let rtU = join(__dirname, `./${jadi}`)
+if (!existsSync(rtU)) {
+mkdirSync(rtU, { recursive: true }) 
+}
+
+global.rutaJadiBot = join(__dirname, `./${jadi}`)
+if (global.MichiJadibts) {
+if (!existsSync(global.rutaJadiBot)) {
+mkdirSync(global.rutaJadiBot, { recursive: true }) 
+console.log(chalk.bold.cyan(`ꕥ La carpeta: ${jadi} se creó correctamente.`))
+} else {
+console.log(chalk.bold.cyan(`ꕥ La carpeta: ${jadi} ya está creada.`)) 
+}
+const readRutaJadiBot = readdirSync(rutaJadiBot)
+if (readRutaJadiBot.length > 0) {
+const creds = 'creds.json'
+for (const gjbts of readRutaJadiBot) {
+const botPath = join(rutaJadiBot, gjbts)
+const readBotPath = readdirSync(botPath)
+if (readBotPath.includes(creds)) {
+MichiJadiBot({pathMichiJadiBot: botPath, m: null, conn, args: '', usedPrefix: '/', command: 'serbot'})
+}}}}
+
+const pluginFolder = join(__dirname, '../plugins')
+const pluginFilter = (filename) => /\.js$/.test(filename)
+global.plugins = {}
+async function filesInit() {
+for (const filename of readdirSync(pluginFolder).filter(pluginFilter)) {
+try {
+const file = global.__filename(join(pluginFolder, filename))
+const module = await import(file)
+global.plugins[filename] = module.default || module
+} catch (e) {
+conn.logger.error(e)
+delete global.plugins[filename]
+}}}
+await filesInit()
+console.log(chalk.cyan(`[ ✿ ] Plugins cargados: ${Object.keys(global.plugins).length}`))
+
+global.reload = async (_ev, filename) => {
+if (pluginFilter(filename)) {
+const dir = global.__filename(join(pluginFolder, filename), true);
+if (filename in global.plugins) {
+if (existsSync(dir)) conn.logger.info(` updated plugin - '${filename}'`)
+else {
+conn.logger.warn(`deleted plugin - '${filename}'`)
+return delete global.plugins[filename]
+}} else conn.logger.info(`new plugin - '${filename}'`)
+const err = syntaxerror(readFileSync(dir), filename, {
+sourceType: 'module',
+allowAwaitOutsideFunction: true,
+});
+if (err) conn.logger.error(`syntax error while loading '${filename}'\n${format(err)}`)
+else {
+try {
+const module = (await import(`${global.__filename(dir)}?update=${Date.now()}`));
+global.plugins[filename] = module.default || module;
+} catch (e) {
+conn.logger.error(`error require plugin '${filename}\n${format(e)}'`)
+} finally {
+global.plugins = Object.fromEntries(Object.entries(global.plugins).sort(([a], [b]) => a.localeCompare(b)))
+}}}}
+Object.freeze(global.reload)
+watch(pluginFolder, global.reload)
+await global.reloadHandler()
+async function _quickTest() {
+const test = await Promise.all([
+spawn('ffmpeg'),
+spawn('ffprobe'),
+spawn('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-filter_complex', 'color', '-frames:v', '1', '-f', 'webp', '-']),
+spawn('convert'),
+spawn('magick'),
+spawn('gm'),
+spawn('find', ['--version']),
+].map((p) => {
+return Promise.race([
+new Promise((resolve) => {
+p.on('close', (code) => {
+resolve(code !== 127);
+});
+}),
+new Promise((resolve) => {
+p.on('error', (_) => resolve(false))
+})])
+}))
+const [ffmpeg, ffprobe, ffmpegWebp, convert, magick, gm, find] = test;
+const s = global.support = {ffmpeg, ffprobe, ffmpegWebp, convert, magick, gm, find};
+Object.freeze(global.support);
+}
+setInterval(async () => {
+  const baseDir = `./${jadi}/`;
+  try {
+    if (!existsSync(baseDir)) return;
+    const subBots = await fs.promises.readdir(baseDir);
+    const tmpExtensions = ['.bak', '.log', '.tmp', '.old']
+    for (const bot of subBots) {
+      const botPath = join(baseDir, bot);
+      const stat = await fs.promises.stat(botPath).catch(() => null);
+      if (!stat?.isDirectory()) continue;
+      const files = await fs.promises.readdir(botPath);
+      for (const file of files) {
+        if (tmpExtensions.some(ext => file.endsWith(ext))) {
+          try { await fs.promises.unlink(join(botPath, file)) } catch {}
+        }
+      }
+    }
+  } catch {}
+}, 10 * 60 * 1000)
+
+setInterval(async () => {
+const tmpDir = join(__dirname, 'tmp')
+try {
+const filenames = await fs.promises.readdir(tmpDir)
+const now = Date.now()
+for (const f of filenames) {
+try {
+const stat = await fs.promises.stat(join(tmpDir, f))
+if (now - stat.mtimeMs > 300000) await fs.promises.unlink(join(tmpDir, f)).catch(() => {})
+} catch {}}
+} catch {}}, 120 * 1000)
+
+setInterval(async () => {
+const orphanFiles = ['database.json']
+for (const file of orphanFiles) {
+try {
+if (existsSync(file)) await fs.promises.unlink(file).catch(() => {})
+} catch {}
+} }, 10 * 60 * 1000)
+setInterval(() => {
+  if (!Array.isArray(global.conns)) return
+  for (let i = global.conns.length - 1; i >= 0; i--) {
+    const sock = global.conns[i]
+    if (!sock || (!sock.user && (!sock.ws || sock.ws.readyState === 3))) {
+      try { sock?.ev?.removeAllListeners() } catch {}
+      try { sock?.ws?.close() } catch {}
+      global.conns.splice(i, 1)
+    }
+  }
+}, 60000)
+let healthCheckFailures = 0
+setInterval(async () => {
+    try {
+        if (global.conn?.user?.id) {
+            const state = global.conn.ws?.readyState
+            if (!global.conn.ws || state === 3 || state === 2) {
+                healthCheckFailures++
+                if (healthCheckFailures >= 5) {
+                    console.log(chalk.bold.yellowBright(`\n⚠︎ Health check: WebSocket caído (${state}, ${healthCheckFailures} intentos). Reconectando...`))
+                    healthCheckFailures = 0
+                    await global.reloadHandler(true).catch(console.error)
+                }
+            } else {
+                healthCheckFailures = 0
+            }
+        }
+    } catch (e) {
+        console.error('Error en health check:', e)
+    }
+}, 120000)
+
+_quickTest().catch(console.error)
+async function isValidPhoneNumber(number) {
+try {
+number = number.replace(/\s+/g, '')
+if (number.startsWith('+521')) {
+number = number.replace('+521', '+52');
+} else if (number.startsWith('+52') && number[4] === '1') {
+number = number.replace('+52 1', '+52');
+}
+const parsedNumber = phoneUtil.parseAndKeepRawInput(number)
+return phoneUtil.isValidNumber(parsedNumber)
+} catch (error) {
+return false
+}}
+
+async function joinChannels(sock) {
+for (const value of Object.values(global.ch)) {
+if (typeof value === 'string' && value.endsWith('@newsletter')) {
+await sock.newsletterFollow(value).catch(() => {})
+}}}
