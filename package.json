@@ -26,7 +26,7 @@
     "@bochilteam/scraper": "^4.2.4",
     "@hapi/boom": "^10.0.1",
     "@vitalets/google-translate-api": "^8.0.0",
-    "@whiskeysockets/baileys": "git@github.com:Andresv27728/baileys-beta.git",
+    "@whiskeysockets/baileys": "github:this-xys/WaSocket#41ce95870eb3c78d038ad9055705d270052cdfe2",
     "acrcloud": "^1.4.0",
     "aptoide-scraper": "^1.0.1",
     "awesome-phonenumber": "^3.4.0",
@@ -74,6 +74,6 @@
     "tar": "7.5.22"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=22.5.0"
   }
 }
