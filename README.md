@@ -14,7 +14,7 @@
 ## 🎸 Sobre el proyecto
 
 <p align="center">
-  <img src="assets/bocchi-hitori.jpg" alt="Bocchi the Rock" width="620"/>
+  <img src="assets/bocchi-readme-banner.png" alt="BocchiTheRock-MD — banner del proyecto" width="820"/>
 </p>
 
 **BocchiTheRock-MD** es un bot de WhatsApp Multi-Device en español, inspirado en la estética de *Bocchi the Rock!*. Su base modular incluye herramientas para grupos, descargas, stickers, anime, economía, juegos y reacciones.
@@ -158,8 +158,7 @@ Las funciones experimentales deben probarse en un grupo privado antes de habilit
 ## 🖼️ Recursos visuales
 
 <p align="center">
-  <img src="assets/bocchi-band.png" alt="Bocchi the Rock" width="320"/>
-  <img src="assets/bocchi-menu.jpg" alt="Bocchi menu" width="320"/>
+  <img src="assets/bocchi-readme-banner-2.png" alt="BocchiTheRock-MD — banner alternativo" width="820"/>
 </p>
 
 Los recursos visuales incluidos son material de referencia. Reemplázalos por arte propio, generado con permiso o con licencia compatible si vas a redistribuir el proyecto.
