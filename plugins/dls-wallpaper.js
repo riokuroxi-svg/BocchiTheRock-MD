@@ -40,7 +40,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
         ['🎄 Pinterest navideño', `${usedPrefix}pinterest ${text}`]
       ],
       null,
-      [['BocchiTheRock-MD ⚔️', 'https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O']],
+      [['BocchiTheRock-MD ⚔️', '']],
       fkontak
     );
   } catch (e) {

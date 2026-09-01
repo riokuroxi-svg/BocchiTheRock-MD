@@ -11,16 +11,16 @@ const handler = async (m, { conn }) => {
         role: "Owner Principal",
         number: "584242773183",
         image: "https://i.ibb.co/3NfYh9k/default-avatar.png",
-        description: "Creador principal y encargado del desarrollo general.\n\n🌐 GitHub: github.com/yosue891\n📢 Canal: https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O\n📦 Repo: https://github.com/yosue891/BocchiTheRock-MD.git",
+        description: "Creador principal y encargado del desarrollo general.\n\n🌐 GitHub: github.com/riokuroxi-svg\n📢 Canal: \n📦 Repo: https://github.com/riokuroxi-svg/BocchiTheRock-MD.git",
         btnLabel: "Canal de Yosue",
-        btnUrl: "https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O"
+        btnUrl: ""
       },
       {
         name: "Ado",
         role: "Segundo Creador Principal",
         number: "50498273976",
         image: "https://i.ibb.co/3NfYh9k/default-avatar.png",
-        description: "Co-creador y encargado de la optimización y soporte del proyecto.\n\n🌐 GitHub: github.com/ado-hub\n📢 Canal: https://whatsapp.com/channel/0029VbD5h6s0AgWBpfCQlw2P\n📦 Repo: https://github.com/yosue891/BocchiTheRock-MD.git",
+        description: "Co-creador y encargado de la optimización y soporte del proyecto.\n\n🌐 GitHub: github.com/ado-hub\n📢 Canal: https://whatsapp.com/channel/0029VbD5h6s0AgWBpfCQlw2P\n📦 Repo: https://github.com/riokuroxi-svg/BocchiTheRock-MD.git",
         btnLabel: "Canal de Ado",
         btnUrl: "https://whatsapp.com/channel/0029VbD5h6s0AgWBpfCQlw2P"
       },
@@ -29,7 +29,7 @@ const handler = async (m, { conn }) => {
         role: "Desarrollador",
         number: "584248272650",
         image: "https://i.ibb.co/3NfYh9k/default-avatar.png",
-        description: "Soporte técnico y desarrollador de funciones avanzadas.\n\n💬 Grupo: https://chat.whatsapp.com/GNZoTT5MKYe6yJtfCdCqoO\n📦 Repo: https://github.com/yosue891/BocchiTheRock-MD.git",
+        description: "Soporte técnico y desarrollador de funciones avanzadas.\n\n💬 Grupo: https://chat.whatsapp.com/GNZoTT5MKYe6yJtfCdCqoO\n📦 Repo: https://github.com/riokuroxi-svg/BocchiTheRock-MD.git",
         btnLabel: "Grupo de Ventas/Sorteos",
         btnUrl: "https://chat.whatsapp.com/GNZoTT5MKYe6yJtfCdCqoO"
       }
@@ -84,7 +84,7 @@ const handler = async (m, { conn }) => {
               name: "cta_url",
               buttonParamsJson: JSON.stringify({
                 display_text: "Repositorio GitHub",
-                url: "https://github.com/yosue891/BocchiTheRock-MD.git"
+                url: "https://github.com/riokuroxi-svg/BocchiTheRock-MD.git"
               })
             }
           ]

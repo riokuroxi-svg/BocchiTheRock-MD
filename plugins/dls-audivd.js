@@ -9,7 +9,7 @@ const handler = async (m, { conn }) => {
     const q = m.quoted ? m.quoted : m
     const mime = (q.msg || q).mimetype || ''
 
-    if (!/video/.test(mime)) return m.reply('✨ *Shadow Garden — Análisis*\n\n❌ Responde a un video para extraer su audio.')
+    if (!/video/.test(mime)) return m.reply('✨ *Bocchi Garden — Análisis*\n\n❌ Responde a un video para extraer su audio.')
 
     await m.react("⏳")
 

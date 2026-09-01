@@ -32,7 +32,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) return m.reply(`[ 🕸️ ] Formato incorrecto. Revela el portal usando:\n${usedPrefix + command} id_del_canal | nombre o enlace de la música`)
 
   const parts = text.split('|')
-  if (parts.length < 2) return m.reply(`[ ⚠️ ] Separa el destino de la invocación usando la barra '|'. Ej:\n${usedPrefix + command} 120363300000000000@newsletter | Eminence in Shadow Theme`)
+  if (parts.length < 2) return m.reply(`[ ⚠️ ] Separa el destino de la invocación usando la barra '|'. Ej:\n${usedPrefix + command} 120363300000000000@newsletter | Bocchi the Rock! Theme`)
 
   const channelId = parts[0].trim()
   const searchQuery = parts.slice(1).join('|').trim()
@@ -196,7 +196,7 @@ const downloadMediaToChannel = async (conn, m, url, channelId) => {
         forwardedNewsletterMessageInfo: {
           newsletterJid: channelId,
           serverMessageId: 100,
-          newsletterName: "Shadow Garden",
+          newsletterName: "Bocchi Garden",
         },
       },
     })

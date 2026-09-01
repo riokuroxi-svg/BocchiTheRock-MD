@@ -4,9 +4,9 @@ import fs from 'fs'
 import PhoneNumber from 'awesome-phonenumber'
 import moment from 'moment-timezone'
 
-const botname = global.botname || "Shadow Garden"
+const botname = global.botname || "Bocchi Garden"
 const dev = global.dev || "Cid Kagenou"
-const banner = global.banner || "https://raw.githubusercontent.com/yosue891/Shadow-MD/refs/heads/main/G9i8jTSWgAAppEQ.jpg"
+const banner = global.banner || "https://raw.githubusercontent.com/riokuroxi-svg/BocchiTheRock-MD/refs/heads/main/G9i8jTSWgAAppEQ.jpg"
 const channelRD = global.channelRD || { id: "0@newsletter", name: "Shadow Channel" }
 
 let handler = async (m, { conn, usedPrefix, __dirname, participants }) => {
@@ -93,8 +93,8 @@ ${readMore}
 乂 PROTOCOLO DE COMANDOS DE LA SOMBRA 乂\n`.trim()
 
     const icon = [
-      'https://raw.githubusercontent.com/yosue891/Shadow-MD/refs/heads/main/G9i8jTSWgAAppEQ.jpg',
-      'https://raw.githubusercontent.com/yosue891/Shadow-MD/refs/heads/main/G9i8jTSWgAAppEQ.jpg'
+      'https://raw.githubusercontent.com/riokuroxi-svg/BocchiTheRock-MD/refs/heads/main/G9i8jTSWgAAppEQ.jpg',
+      'https://raw.githubusercontent.com/riokuroxi-svg/BocchiTheRock-MD/refs/heads/main/G9i8jTSWgAAppEQ.jpg'
     ]
     let icons = icon[Math.floor(Math.random() * icon.length)]
 

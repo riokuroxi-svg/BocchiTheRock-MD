@@ -1,4 +1,4 @@
-// 💫 Sopa de Letras Shadow Garden + Navidad
+// 💫 Sopa de Letras Bocchi Garden + Navidad
 let juegos = {} // almacena partidas activas por chat
 
 function generarSopaDeLetras(palabras) {
@@ -31,7 +31,7 @@ let handler = async (m, { command, text }) => {
   const chatId = m.chat
   const jugador = m.pushName || m.sender
 
-  // Palabras fijas estilo Shadow Garden + Navidad
+  // Palabras fijas estilo Bocchi Garden + Navidad
   const palabras = [
     "shadow", "garden", "eminence", "alpha", "beta", "gamma",
     "delta", "epsilon", "zeta", "navidad", "regalo", "nieve",
@@ -43,7 +43,7 @@ let handler = async (m, { command, text }) => {
     juegos[chatId] = { jugador, palabras, inicio: Date.now() }
 
     await m.reply(
-`🌑🎄 *Sopa de Letras del Shadow Garden* 🎄🌑
+`🌑🎄 *Sopa de Letras del Bocchi Garden* 🎄🌑
 👤 Jugador: ${jugador}
 ⏳ Tiempo máximo: 10 minutos
 
@@ -86,7 +86,7 @@ ${sopa}
     const faltantes = juegos[chatId].palabras.filter(p => !encontradas.includes(p))
 
     if (faltantes.length === 0) {
-      m.reply(`🎉✨ ¡Victoria, ${juegos[chatId].jugador}! Has encontrado todas las palabras del Shadow Garden antes de que las sombras te atraparan 🎄🌑`)
+      m.reply(`🎉✨ ¡Victoria, ${juegos[chatId].jugador}! Has encontrado todas las palabras del Bocchi Garden antes de que las sombras te atraparan 🎄🌑`)
       delete juegos[chatId]
     } else {
       m.reply(`🔮 ${juegos[chatId].jugador}, aún faltan palabras por descubrir: ${faltantes.join(', ')}`)

@@ -7,7 +7,7 @@ var handler = async (m, { conn, text}) => {
   conn.reply(m.chat, `*┏━͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡━┓*\n
 ❥ *"${pickRandom(global.consejo)}"*\n
 *┗━͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡━┛*\n
-✨ *Shadow Garden susurra desde la oscuridad...*`, m)
+✨ *Bocchi Garden susurra desde la oscuridad...*`, m)
 
 }
 

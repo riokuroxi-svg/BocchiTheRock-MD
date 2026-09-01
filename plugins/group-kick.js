@@ -21,7 +21,7 @@ var handler = async (m, { conn, participants, usedPrefix, command }) => {
 
     await conn.reply(
       m.chat,
-      `☽ 『 Shadow Garden 』 ☽\n\nLas sombras han expulsado a @${user.split('@')[0]}.\n\n✦ Así termina quien desafía las reglas del Reino.\n✦ ¿Quién más desea acompañarlo en la oscuridad eterna?`,
+      `☽ 『 Bocchi Garden 』 ☽\n\nLas sombras han expulsado a @${user.split('@')[0]}.\n\n✦ Así termina quien desafía las reglas del Reino.\n✦ ¿Quién más desea acompañarlo en la oscuridad eterna?`,
       m,
       { mentions: [user] }
     )

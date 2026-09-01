@@ -94,7 +94,7 @@ async function handler(m, { text, conn }) {
             locationMessage: {
                 name: 'Copilot AI - Inteligencia Arcana 🌌',
                 jpegThumbnail: await (await fetch('https://i.ibb.co/fdjQ3zng/dec97605db05.jpg')).buffer(),
-                vcard: 'BEGIN:VCARD\nVERSION:3.0\nN:;Shadow;;;\nFN:Shadow\nORG:Eminence in Shadow\nTITLE:\nitem1.TEL;waid=19709001746:+1 (970) 900-1746\nitem1.X-ABLabel:Shadow\nX-WA-BIZ-DESCRIPTION:Reino de las Sombras\nX-WA-BIZ-NAME:Shadow\nEND:VCARD'
+                vcard: 'BEGIN:VCARD\nVERSION:3.0\nN:;Shadow;;;\nFN:Shadow\nORG:Bocchi the Rock!\nTITLE:\nitem1.TEL;waid=19709001746:+1 (970) 900-1746\nitem1.X-ABLabel:Shadow\nX-WA-BIZ-DESCRIPTION:Reino de las Sombras\nX-WA-BIZ-NAME:Shadow\nEND:VCARD'
             }
         },
         participant: '0@s.whatsapp.net'

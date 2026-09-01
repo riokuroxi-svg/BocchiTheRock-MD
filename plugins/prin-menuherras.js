@@ -63,7 +63,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 *╰─────────────╯*`.trim()
 
     let finalMenu = infoUser + '\n\n' + comandosHerras
-    let imagen = 'https://raw.githubusercontent.com/yosue891/Shadow-MD/refs/heads/main/Gemini_Generated_Image_l10dnl10dnl10dnl.png'
+    let imagen = 'https://raw.githubusercontent.com/riokuroxi-svg/BocchiTheRock-MD/refs/heads/main/Gemini_Generated_Image_l10dnl10dnl10dnl.png'
 
     let vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;Itachi;;;\nFN:Itachi\nitem1.TEL;waid=13135550002:+1 (313) 555-0002\nitem1.X-ABLabel:Celular\nEND:VCARD`
     let qkontak = { 
@@ -96,7 +96,7 @@ let handler = async (m, { conn, usedPrefix }) => {
                   name: "cta_url",
                   buttonParamsJson: JSON.stringify({
                     display_text: "🍃 Canal Oficial",
-                    url: "https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O"
+                    url: ""
                   })
                 },
                 {

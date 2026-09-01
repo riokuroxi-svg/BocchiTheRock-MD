@@ -2,7 +2,7 @@ const { generateWAMessageFromContent, proto } = (await import('@whiskeysockets/b
 
 var handler = async (m, { conn, text }) => {
 
-  conn.reply(m.chat, `☽ Buscando un piropo con Shadow Garden, espera un momento...`, m)
+  conn.reply(m.chat, `☽ Buscando un piropo con Bocchi Garden, espera un momento...`, m)
 
   conn.reply(
     m.chat,

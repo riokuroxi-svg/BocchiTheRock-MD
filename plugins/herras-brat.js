@@ -7,7 +7,7 @@ var handler = async (m, { conn, usedPrefix, command, text }) => {
     let [txt, color] = text.split('|')
     let textoFinal = txt || m.quoted?.text || text
 
-    if (!textoFinal) return conn.reply(m.chat, '🌑✦ *Shadow Garden* necesita un mensaje o texto.', m)
+    if (!textoFinal) return conn.reply(m.chat, '🌑✦ *Bocchi Garden* necesita un mensaje o texto.', m)
 
     if (!color) {
         const colores = [
@@ -24,7 +24,7 @@ var handler = async (m, { conn, usedPrefix, command, text }) => {
 
         const interactive = proto.Message.InteractiveMessage.fromObject({
             body: { text: `🌑✦ *Sʜᴀᴅᴏᴡ Gᴀʀᴅᴇɴ Cᴀᴛᴀʟᴏɢᴜᴇ*\n\nEsperando tu elección de color para:\n> *"${textoFinal.trim()}"*` },
-            footer: { text: "Shadow Garden — The Eminence in Shadow" },
+            footer: { text: "Bocchi Garden — The Bocchi the Rock!" },
             nativeFlowMessage: {
                 buttons: [{
                     name: "single_select",

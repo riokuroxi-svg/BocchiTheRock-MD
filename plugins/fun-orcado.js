@@ -1,4 +1,4 @@
-// 👻 Juego del Ahorcado Shadow Garden + Navidad echo por yosue uwu osea shadow 👻
+// 👻 Juego del Ahorcado Bocchi Garden + Navidad echo por yosue uwu osea shadow 👻
 let partidas = {} // almacena partidas activas por chat
 
 // Dibujos del ahorcado paso a paso
@@ -67,7 +67,7 @@ let handler = async (m, { command, text }) => {
   const chatId = m.chat
   const jugador = m.pushName || m.sender
 
-  // Palabras fijas estilo Shadow Garden + Navidad
+  // Palabras fijas estilo Bocchi Garden + Navidad
   const palabras = [
     "shadow", "garden", "eminence", "alpha", "beta", "gamma",
     "delta", "epsilon", "zeta", "navidad", "regalo", "nieve",
@@ -79,7 +79,7 @@ let handler = async (m, { command, text }) => {
     partidas[chatId] = { jugador, palabra, letras: [], errores: 0 }
 
     await m.reply(
-`🌑🎄 *Juego del Ahorcado del Shadow Garden* 🎄🌑
+`🌑🎄 *Juego del Ahorcado del Bocchi Garden* 🎄🌑
 👤 Jugador: ${jugador}
 
 Palabra oculta: ${ocultarPalabra(partidas[chatId].palabra, [])}

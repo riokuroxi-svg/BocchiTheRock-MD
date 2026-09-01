@@ -241,7 +241,7 @@ let handler = async (m, { conn }) => {
       letter-spacing="3" opacity="0.65">TIERRA</text>
 <text x="784" y="413"
       fill="#ffffff" font-size="20" font-weight="700"
-      font-family="'Arial Black', sans-serif">Shadow Garden</text>
+      font-family="'Arial Black', sans-serif">Bocchi Garden</text>
 
 <rect x="1002" y="348" width="218" height="80" rx="14"
       fill="url(#mc)" stroke="#b060ff" stroke-opacity="0.15" stroke-width="1"/>

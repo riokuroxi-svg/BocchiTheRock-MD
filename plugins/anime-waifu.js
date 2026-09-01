@@ -6,7 +6,7 @@ const newsletterName = '👑 BocchiTheRock-MD uwu👑 '
 
 const packname = '👑 BocchiTheRock-MD 👑'
 const dev = 'Creado por Yosue'
-const redes = 'https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O'
+const redes = ''
 const icons = 'https://files.catbox.moe/6bgv7s.jpg'
 
 let handler = async (m, { conn, usedPrefix, command }) => {

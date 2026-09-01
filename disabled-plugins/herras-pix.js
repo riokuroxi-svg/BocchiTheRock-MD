@@ -13,7 +13,7 @@ let handler = async (m, { conn }) => {
                     type: 'pix_static_code',
                     pix_static_code: {
                       merchant_name: 'BocchiTheRock-MD',
-                      key: 'https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O',
+                      key: '',
                       key_type: 'EVP'
                     }
                   }

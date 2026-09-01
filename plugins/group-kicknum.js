@@ -19,7 +19,7 @@ const handler = async (m, { conn, args, participants, command }) => {
     if (matching.length === 0) return m.reply(`👻🌌 Las sombras no encontraron almas con el prefijo ${prefix}...`)
 
     const lista = matching.map((p, i) => `${i + 1}. wa.me/${p.id.split('@')[0]}`).join('\n')
-    return m.reply(`🔎 ❄️ *Shadow Garden Reporte Navideño* 🎄\n\nSe han detectado usuarios con el prefijo ${prefix}:\n\n${lista}\n\n✨ Las sombras vigilan incluso en estas fiestas.`)
+    return m.reply(`🔎 ❄️ *Bocchi Garden Reporte Navideño* 🎄\n\nSe han detectado usuarios con el prefijo ${prefix}:\n\n${lista}\n\n✨ Las sombras vigilan incluso en estas fiestas.`)
   }
 
   if (command === 'kicknum') {
@@ -28,7 +28,7 @@ const handler = async (m, { conn, args, participants, command }) => {
     for (let p of matching) {
       await conn.groupParticipantsUpdate(m.chat, [p.id], 'remove').catch(_ => null)
     }
-    return m.reply(`✅ 🎄 *Shadow Garden ha expulsado ${matching.length} alma(s) con el prefijo ${prefix}.*\n\n🌌 Ja... así es como las sombras celebran la navidad: con disciplina y silencio.`)
+    return m.reply(`✅ 🎄 *Bocchi Garden ha expulsado ${matching.length} alma(s) con el prefijo ${prefix}.*\n\n🌌 Ja... así es como las sombras celebran la navidad: con disciplina y silencio.`)
   }
 }
 

@@ -1,6 +1,6 @@
 let handler = async (m, { conn, command }) => {
   conn.suit = conn.suit ? conn.suit : {}
-  let pp = 'https://files.catbox.moe/6fewjd.jpg' // Imagen Shadow Garden
+  let pp = 'https://files.catbox.moe/6fewjd.jpg' // Imagen Bocchi Garden
 
   // Crear nueva sala de PVP
   if (command === 'pvp' || command === 'ppt') {
@@ -22,7 +22,7 @@ let handler = async (m, { conn, command }) => {
     }
 
     conn.sendMessage(m.chat, {
-      text: `☽ 『 Shadow Garden 』 ☽
+      text: `☽ 『 Bocchi Garden 』 ☽
 
 @${m.sender.split('@')[0]} ha retado a @${partnerId.split('@')[0]} a un duelo de Piedra, Papel o Tijera.
 
@@ -30,7 +30,7 @@ Responde con "aceptar" o "rechazar".`,
       mentions: [m.sender, partnerId],
       contextInfo: {
         externalAdReply: {
-          title: 'Duelo Shadow Garden',
+          title: 'Duelo Bocchi Garden',
           body: 'El poder oculto se manifiesta...',
           thumbnailUrl: pp,
           mediaType: 1,
@@ -78,7 +78,7 @@ handler.before = async function (m) {
     room.status == 'wait'
   ) {
     if (/^rechazar$/i.test(m.text)) {
-      const textno = `☽ 『 Shadow Garden 』 ☽
+      const textno = `☽ 『 Bocchi Garden 』 ☽
 
 @${room.p2.split`@`[0]} rechazó el duelo.`
       m.reply(textno, null, { mentions: [room.p2] })
@@ -89,7 +89,7 @@ handler.before = async function (m) {
     room.asal = m.chat
     clearTimeout(room.waktu)
 
-    const textplay = `☽ 『 Shadow Garden 』 ☽
+    const textplay = `☽ 『 Bocchi Garden 』 ☽
 
 🎮 El duelo comienza.
 
@@ -98,7 +98,7 @@ Opciones enviadas a los chats privados de @${room.p.split`@`[0]} y @${room.p2.sp
 Elige: Piedra, Papel o Tijera (se aceptan variantes como "pierde", "tijeras", "hoja" y emojis 🪨📄✂️).`
     m.reply(textplay, m.chat, { mentions: [room.p, room.p2] })
 
-    const opciones = `🌙 『 Shadow Garden 』 🌙
+    const opciones = `🌙 『 Bocchi Garden 』 🌙
 Selecciona una opción:
 
 ✨ Piedra
@@ -136,7 +136,7 @@ Responde con tu elección (variante o emoji también sirve).`
     else if (room.pilih === 'papel' && room.pilih2 === 'piedra') win = room.p
     else if (room.pilih === 'papel' && room.pilih2 === 'tijera') win = room.p2
 
-    const resultado = `☽ 『 Shadow Garden 』 ☽
+    const resultado = `☽ 『 Bocchi Garden 』 ☽
 
 ${tie ? '🥴 Empate!!' : ''}
 @${room.p.split`@`[0]} (${room.text})

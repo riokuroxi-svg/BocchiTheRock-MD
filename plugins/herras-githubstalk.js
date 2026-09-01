@@ -65,7 +65,7 @@ let handler = async (m, { conn, args }) => {
             thumbnailUrl: d.profile_pic,
             mediaType: 1,
             renderLargerThumbnail: false,
-            sourceUrl: 'https://github.com/yosue891/BocchiTheRock-MD.git'
+            sourceUrl: 'https://github.com/riokuroxi-svg/BocchiTheRock-MD.git'
           }
         }
       },

@@ -21,7 +21,7 @@ let handler = async (m, { conn, text, usedPrefix }) => {
         locationMessage: {
           name: "🔍 YouTube Search",
           jpegThumbnail: smallThumb,
-          vcard: "BEGIN:VCARD\nVERSION:3.0\nN:;YouTube;;;\nFN:YouTube\nORG:Shadow Garden\nEND:VCARD"
+          vcard: "BEGIN:VCARD\nVERSION:3.0\nN:;YouTube;;;\nFN:YouTube\nORG:Bocchi Garden\nEND:VCARD"
         }
       },
       participant: "0@s.whatsapp.net"
@@ -40,7 +40,7 @@ let handler = async (m, { conn, text, usedPrefix }) => {
 
     const interactive = proto.Message.InteractiveMessage.fromObject({
       body: { text: "🌑✦ Selecciona un video de la lista para descargarlo automáticamente." },
-      footer: { text: "Shadow Garden — YouTube Search" },
+      footer: { text: "Bocchi Garden — YouTube Search" },
       header: {
         hasMediaAttachment: true,
         imageMessage: media.imageMessage

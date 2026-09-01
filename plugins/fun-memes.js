@@ -20,7 +20,7 @@ let handler = async (m, { command, conn }) => {
       participant: '0@s.whatsapp.net'
     };
 
-    let caption = `☽ 『 Shadow Garden Memes 』 ☽
+    let caption = `☽ 『 Bocchi Garden Memes 』 ☽
 
 🧠 Aquí tienes un meme en español invocado desde las sombras...
 ✦ Que la risa ilumine tu noche oscura.`;
@@ -35,7 +35,7 @@ let handler = async (m, { command, conn }) => {
         ['☽ Volver al Menú ☽', '/menu']
       ],
       null,
-      [[bot, 'https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O']],
+      [[bot, '']],
       fkontak
     );
 

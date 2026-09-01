@@ -8,7 +8,7 @@ let handler = async (m, { conn }) => {
         const pluginsDir = './plugins'
         const files = fs.readdirSync(pluginsDir).filter(file => file.endsWith('.js'))
 
-        let response = `⚫ *Shadow Garden – Escaneo de Corrupción* ⚫\n\n`
+        let response = `⚫ *Bocchi Garden – Escaneo de Corrupción* ⚫\n\n`
         response += `「 𝘌𝘭 𝘚𝘰𝘮𝘣𝘳𝘢 𝘚𝘶𝘱𝘳𝘦𝘮𝘰 𝘪𝘯𝘪𝘤𝘪𝘢 𝘦𝘭 𝘢𝘯𝘢́𝘭𝘪𝘴𝘪𝘴 」\n\n`
         response += `📂 *Plugins detectados:* ${files.length}\n`
         response += `━━━━━━━━━━━━━━━━━━━\n\n`

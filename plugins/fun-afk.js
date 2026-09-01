@@ -23,7 +23,7 @@ export async function before(m, { conn }) {
     key: {
       remoteJid: 'status@broadcast',
       fromMe: false,
-      id: 'ShadowCatalogAFK',
+      id: 'BocchiCatalogAFK',
       participant: '0@s.whatsapp.net'
     },
     message: {
@@ -37,7 +37,7 @@ export async function before(m, { conn }) {
           description: 'Shadow team',
           currencyCode: 'USD',
           priceAmount1000: '0',
-          retailerId: 'ShadowCore',
+          retailerId: 'BocchiCore',
           productImageCount: 1
         },
         businessOwnerJid: '584242773183@s.whatsapp.net'

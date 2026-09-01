@@ -1,7 +1,7 @@
 /*
 	* Create By Fede Uchiha 
 	* GitHub https://github.com/dev-fedexyro
-	* Whatsapp: https://whatsapp.com/channel/0029VbBG4i2GE56rSgXsqw2W
+	* Whatsapp: 
 */
 import { generateWAMessageContent, generateWAMessageFromContent, proto } from '@whiskeysockets/baileys'
 import fetch from 'node-fetch'
@@ -99,7 +99,7 @@ Toca el botón para copiar el LID o visitar el canal.
       name: "cta_url", 
       buttonParamsJson: JSON.stringify({ 
         display_text: "canal de shadow 🌌", 
-        url: "https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O" 
+        url: "" 
       })
     }
   ];

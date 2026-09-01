@@ -29,7 +29,7 @@ handler.all = async function(m) {
         "té": "🍵 Serenidad navideña",
         "dinero": "💸 Todos lo buscan, incluso en la oscuridad",
         "trabajo": "💪 Las sombras te observan, sigue adelante",
-        "fiesta": "🎉 Celebración en el Shadow Garden",
+        "fiesta": "🎉 Celebración en el Bocchi Garden",
         "música": "🎵 Ecos sombríos... ¿qué escuchas?",
         "frío": "🥶 Abrígate, las sombras son gélidas",
         "calor": "🥵 El fuego rompe la oscuridad",

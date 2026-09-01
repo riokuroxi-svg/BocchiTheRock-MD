@@ -41,7 +41,7 @@ let handler = async (m, { conn, text }) => {
     caption += `\n『☽』 En el jardín sombrío, todos responden al llamado de las sombras.`
 
     const thumbnail = await (await fetch('https://raw.githubusercontent.com/Andresv27728/dtbs/main/shadow.jpg')).buffer()
-    const canalOficial = 'https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O'
+    const canalOficial = ''
 
     await conn.sendMessage(chatId, {
       image: { url: 'https://raw.githubusercontent.com/Andresv27728/dtbs/main/shadow.jpg' },
@@ -51,13 +51,13 @@ let handler = async (m, { conn, text }) => {
         forwardedNewsletterMessageInfo: {
           newsletterJid: "120363403739366547@newsletter",
           serverMessageId: '',
-          newsletterName: 'Shadow Garden Oficial'
+          newsletterName: 'Bocchi Garden Oficial'
         },
         forwardingScore: 9999999,
         isForwarded: true,
         mentionedJid: mentionIds,
         externalAdReply: {
-          title: `⚔️ Shadow Garden ⚔️`,
+          title: `⚔️ Bocchi Garden ⚔️`,
           body: `El llamado de las sombras ha sido emitido.`,
           previewType: "PHOTO",
           thumbnail,

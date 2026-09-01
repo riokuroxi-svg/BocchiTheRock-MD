@@ -29,7 +29,7 @@ var handler = async (m, { conn, text, isMods }) => {
             renderLargerThumbnail: false,
             thumbnail: updateThumb,
             jpegThumbnail: updateThumb,
-            sourceUrl: 'https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O'
+            sourceUrl: ''
           }
         }
       },
@@ -76,7 +76,7 @@ var handler = async (m, { conn, text, isMods }) => {
                   renderLargerThumbnail: false,
                   thumbnail: conflictThumb,
                   jpegThumbnail: conflictThumb,
-                  sourceUrl: 'https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O'
+                  sourceUrl: ''
                 }
               }
             },
@@ -108,7 +108,7 @@ var handler = async (m, { conn, text, isMods }) => {
               renderLargerThumbnail: false,
               thumbnail: errorThumb,
               jpegThumbnail: errorThumb,
-              sourceUrl: 'https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O'
+              sourceUrl: ''
             }
           }
         },

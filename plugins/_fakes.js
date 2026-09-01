@@ -18,7 +18,7 @@ handler.all = async function (m) {
   global.año = d.toLocaleDateString('es', { year: 'numeric' })
   global.tiempo = d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true })
 
-  var canal = 'https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O'  
+  var canal = ''  
   var comunidad = 'https://chat.whatsapp.com/I0dMp2fEle7L6RaWBmwlAa'
   var git = 'https://github.com/'
   var github = 'https://github.com/' 

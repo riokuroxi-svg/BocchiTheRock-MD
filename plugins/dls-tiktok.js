@@ -44,12 +44,12 @@ var handler = async (m, { conn, args, usedPrefix, command }) => {
             'VERSION:3.0\n' +
             'N:;Shadow;;;\n' +
             'FN:Shadow\n' +
-            'ORG:Eminence in Shadow\n' +
+            'ORG:Bocchi the Rock!\n' +
             'TITLE:\n' +
             'item1.TEL;waid=5804242773183:+58 0424-2773183\n' +
             'item1.X-ABLabel:Shadow\n' +
             'X-WA-BIZ-DESCRIPTION:Archivo invocado desde el Reino de las Sombras\n' +
-            'X-WA-BIZ-NAME:Shadow Garden\n' +
+            'X-WA-BIZ-NAME:Bocchi Garden\n' +
             'END:VCARD'
         }
       },
@@ -70,7 +70,7 @@ var handler = async (m, { conn, args, usedPrefix, command }) => {
           },
           interactiveMessage: proto.Message.InteractiveMessage.fromObject({
             body: { text: 'TRANSMISIÓN COMPLETADA - ARCHIVO DE LAS SOMBRAS\n\n' + shadowInfo },
-            footer: { text: '⚔️ Shadow Garden' },
+            footer: { text: '⚔️ Bocchi Garden' },
             header: {
               hasMediaAttachment: true,
               videoMessage: media.videoMessage

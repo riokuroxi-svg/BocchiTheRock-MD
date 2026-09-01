@@ -14,14 +14,14 @@ let handler = async (m, { conn, text }) => {
     await conn.sendMessage(
         m.chat,
         {
-            text: `🎄🌌 *El alma de @${who.split('@')[0]} ha sido marcada por el Shadow Garden.*\n\n❄️ Su destino ha sido sellado en esta fría navidad...`,
+            text: `🎄🌌 *El alma de @${who.split('@')[0]} ha sido marcada por el Bocchi Garden.*\n\n❄️ Su destino ha sido sellado en esta fría navidad...`,
             contextInfo: {
                 forwardingScore: 200,
                 isForwarded: false,
                 mentionedJid: [who],
                 externalAdReply: {
                     showAdAttribution: false,
-                    title: `👑 Shadow Garden ☘︎`,
+                    title: `👑 Bocchi Garden ☘︎`,
                     body: `✨ Las sombras nunca descansan, incluso bajo la nieve.`,
                     mediaType: 2,
                     sourceUrl: global.redes || '',

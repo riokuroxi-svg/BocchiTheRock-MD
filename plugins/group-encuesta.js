@@ -15,7 +15,7 @@ let handler = async (m, { conn, text, args, usedPrefix, command }) => {
 
   // Título de la encuesta con estilo Shadow + Navidad
   let titulo = `🌑 Encuesta de las Sombras ${emojiChristmas}\n\n` +
-               `👾 *The Eminence in Shadow* se mezcla con la magia navideña...\n` +
+               `👾 *The Bocchi the Rock!* se mezcla con la magia navideña...\n` +
                `✨ Elige con cuidado, cada opción refleja tu destino.`
 
   // Enviar encuesta

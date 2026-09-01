@@ -53,7 +53,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
 │ ⚔️ Ahora puedes usar todos los comandos del bot.
 │ 🌌 Si deseas ver tu perfil, usa *.profile*
 │
-╰─「 Shadow Garden 」─╯
+╰─「 Bocchi Garden 」─╯
 `.trim()
 
   await m.react('🌑')

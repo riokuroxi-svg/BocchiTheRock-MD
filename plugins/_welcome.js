@@ -17,7 +17,7 @@ const YOSOYYO_WELCOME_BANNER = {
     width: 1000,
     height: 500,
     backgroundUrl: 'https://u.pone.rs/pjyqbqyl.jpg',
-    profileUrl: 'https://unavatar.io/github/yosue891',
+    profileUrl: 'https://unavatar.io/github/riokuroxi-svg',
     profileSize: 200,
     profileX: 500,
     profileY: 200,

@@ -19,7 +19,7 @@ const handler = async (m, { conn, command, usedPrefix, text }) => {
     await conn.sendButton(
       m.chat,
       `¿Estás seguro de que quieres romper tu pacto con @${partnerId.split('@')[0]}?`,
-      'Shadow Garden',
+      'Bocchi Garden',
       null,
       [
         ['SÍ, DIVORCIARME', `${usedPrefix}confirmdivorce`],

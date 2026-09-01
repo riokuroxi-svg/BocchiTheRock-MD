@@ -43,7 +43,7 @@ const handler = async (m, { conn, text, command, usedPrefix }) => {
           body: proto.Message.InteractiveMessage.Body.fromObject({ 
             text: `✨ *Título:* ${video.title}\n🔔 *Canal:* ${video.author.name}\n🎬 *Duración:* ${video.timestamp}\n👁️ *Vistas:* ${video.views.toLocaleString()}` 
           }),
-          footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: "Shadow Garden — YouTube" }),
+          footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: "Bocchi Garden — YouTube" }),
           header: proto.Message.InteractiveMessage.Header.fromObject({ 
             title: "Resultados de Búsqueda", 
             hasMediaAttachment: true, 

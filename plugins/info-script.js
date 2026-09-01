@@ -4,7 +4,7 @@ import { generateWAMessageFromContent, generateWAMessageContent, proto } from '@
 
 let handler = async (m, { conn }) => {
   try {
-    let res = await fetch('https://api.github.com/repos/yosue891/BocchiTheRock-MD')
+    let res = await fetch('https://api.github.com/repos/riokuroxi-svg/BocchiTheRock-MD')
     if (!res.ok) throw new Error('Error al obtener datos del repositorio BocchiTheRock-MD')
     let json = await res.json()
 
@@ -33,7 +33,7 @@ let handler = async (m, { conn }) => {
             'VERSION:3.0\n' +
             'N:;script;;;\n' +
             'FN:script\n' +
-            'ORG:Shadow Garden\n' +
+            'ORG:Bocchi Garden\n' +
             'TITLE:\n' +
             'item1.TEL;waid=5804242773183:+58 0424-2773183\n' +
             'item1.X-ABLabel:Creador\n' +

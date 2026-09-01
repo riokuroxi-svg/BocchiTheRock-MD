@@ -18,7 +18,7 @@ const handler = async (m, {conn, isOwner}) => {
 ├ ${isOwner ? '@' + jid.split`@`[0] : jid}`.trim()).join('\n') : '├'}
 └────
 
-✨ En esta navidad sombría, el Shadow Garden vigila en silencio...
+✨ En esta navidad sombría, el Bocchi Garden vigila en silencio...
 `.trim();
 
   m.reply(caption, null, {mentions: conn.parseMention(caption)});

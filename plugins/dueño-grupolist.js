@@ -20,7 +20,7 @@ const handler = async (m, { conn }) => {
       *➤ Total de Participantes:* ${totalParticipants}
       *➤ Link:* ${isBotAdmin ? `https://chat.whatsapp.com/${await conn.groupInviteCode(jid) || '--- (Error) ---'}` : '--- (No admin) ---'}\n\n`;
     }
-    m.reply(`🎄🌌 *Shadow Garden Reporte Navideño de Grupos* 🎅\n\n❄️ *—◉ Total de dominios vigilados:* ${totalGroups}\n\n${txt}\n✨ Las sombras celebran bajo la nieve, pero nunca dejan de observar...`.trim());
+    m.reply(`🎄🌌 *Bocchi Garden Reporte Navideño de Grupos* 🎅\n\n❄️ *—◉ Total de dominios vigilados:* ${totalGroups}\n\n${txt}\n✨ Las sombras celebran bajo la nieve, pero nunca dejan de observar...`.trim());
   } catch {
     const groups = Object.entries(conn.chats).filter(([jid, chat]) => jid.endsWith('@g.us') && chat.isChats);
     const totalGroups = groups.length;
@@ -41,7 +41,7 @@ const handler = async (m, { conn }) => {
       *➤ Total de Participantes:* ${totalParticipants}
       *➤ Link:* ${isBotAdmin ? '--- (Error) ---' : '--- (No admin) ---'}\n\n`;
     }
-    m.reply(`🎄👾 *Shadow Garden Reporte Navideño de Grupos* 🌌\n\n❄️ *—◉ Total de dominios vigilados:* ${totalGroups}\n\n${txt}\n✨ Incluso en navidad, las sombras nunca descansan...`.trim());
+    m.reply(`🎄👾 *Bocchi Garden Reporte Navideño de Grupos* 🌌\n\n❄️ *—◉ Total de dominios vigilados:* ${totalGroups}\n\n${txt}\n✨ Incluso en navidad, las sombras nunca descansan...`.trim());
   }    
 };
 handler.help = ['groups', 'grouplist'];

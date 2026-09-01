@@ -13,7 +13,7 @@ let handler = async (m, { conn}) => {
     const prefijos = './#!';
     const canalId = '120363403739366547@newsletter';
     const canalName = 'SHADOW-BOT';
-    const link = 'https://github.com/yosue891/BocchiTheRock-MD.git';
+    const link = 'https://github.com/riokuroxi-svg/BocchiTheRock-MD.git';
 
     const platform = os.type();
     const now = new Date();

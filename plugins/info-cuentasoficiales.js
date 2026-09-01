@@ -21,10 +21,10 @@ let handler = async (m, {conn, command}) => {
 『☽』 El poder oculto se revela solo en las sombras...
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 ✅ *GITHUB OFICIAL*
-https://github.com/yosue891
+https://github.com/riokuroxi-svg
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 ✅ *CANAL OFICIAL - YOSUE*
-https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O
+
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 ✅ *CANAL OFICIAL - ADO*
 https://whatsapp.com/channel/0029VbBIgz1HrDZg92ISUl2M
@@ -43,7 +43,7 @@ https://chat.whatsapp.com/ETHW7aP7kOICrR2RBrfE6N
    ['☘️ Volver al Menú', '/menu']
        ],
     null, [
-   ['BocchiTheRock-MD ⚔️', 'https://github.com/yosue891/BocchiTheRock-MD']
+   ['BocchiTheRock-MD ⚔️', 'https://github.com/riokuroxi-svg/BocchiTheRock-MD']
        ],
     fkontak
   )

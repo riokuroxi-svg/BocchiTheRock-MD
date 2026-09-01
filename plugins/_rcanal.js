@@ -50,7 +50,7 @@ export async function before(m, { conn }) {
           renderLargerThumbnail: false,
           thumbnail: bannerBuffer,
           jpegThumbnail: bannerBuffer,
-          sourceUrl: 'https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O'
+          sourceUrl: ''
         },
         matchedText: ""
       }

@@ -17,7 +17,7 @@ const handler = async (m, { conn, text }) => {
     key: {
       remoteJid: "status@broadcast",
       fromMe: false,
-      id: "ShadowCatalog",
+      id: "BocchiCatalog",
       participant: "0@s.whatsapp.net"
     },
     message: {
@@ -33,7 +33,7 @@ const handler = async (m, { conn, text }) => {
           description: "Shadow team",
           currencyCode: "USD",
           priceAmount1000: '0',
-          retailerId: "ShadowCore",
+          retailerId: "BocchiCore",
           productImageCount: 1
         },
         businessOwnerJid: "584242773183@s.whatsapp.net"

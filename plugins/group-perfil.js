@@ -84,7 +84,7 @@ var handler = async (m, { conn }) => {
       ['⚔️ Volver al Menú', '/menu']
     ],
     null,
-    [[bot, 'https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O']],
+    [[bot, '']],
     fkontak
   )
 }

@@ -20,19 +20,19 @@ let handler = async (m, { conn, command, isAdmin, isGroupAdmins }) => {
     key: { participants: '0@s.whatsapp.net', fromMe: false, id: 'ShadowGroup' },
     message: {
       locationMessage: {
-        name: `⚔️ ${action.toUpperCase()} — Shadow Garden`,
+        name: `⚔️ ${action.toUpperCase()} — Bocchi Garden`,
         jpegThumbnail: thumb,
         vcard:
           'BEGIN:VCARD\n' +
           'VERSION:3.0\n' +
           'N:;Shadow Group;;;\n' +
           'FN:Shadow Group\n' +
-          'ORG:Shadow Garden\n' +
+          'ORG:Bocchi Garden\n' +
           'TITLE:\n' +
           'item1.TEL;waid=5804242773183:+58 0424-2773183\n' +
           'item1.X-ABLabel:Creador\n' +
           'X-WA-BIZ-DESCRIPTION:Control del Reino de las Sombras\n' +
-          'X-WA-BIZ-NAME:Shadow Garden\n' +
+          'X-WA-BIZ-NAME:Bocchi Garden\n' +
           'END:VCARD'
       }
     },
@@ -42,14 +42,14 @@ let handler = async (m, { conn, command, isAdmin, isGroupAdmins }) => {
   if (action === 'close') {
     await conn.groupSettingUpdate(chatId, 'announcement')
     await conn.sendMessage(chatId, {
-      text: '🌑⚔️ *El Shadow Garden ha sellado el grupo...*\n🕷️ Solo los administradores pueden hablar ahora.'
+      text: '🌑⚔️ *El Bocchi Garden ha sellado el grupo...*\n🕷️ Solo los administradores pueden hablar ahora.'
     }, { quoted: businessHeader })
   }
 
   if (action === 'open') {
     await conn.groupSettingUpdate(chatId, 'not_announcement')
     await conn.sendMessage(chatId, {
-      text: '🌑✨ *El Shadow Garden ha liberado el grupo...*\n⚔️ Las voces vuelven a resonar en la oscuridad.'
+      text: '🌑✨ *El Bocchi Garden ha liberado el grupo...*\n⚔️ Las voces vuelven a resonar en la oscuridad.'
     }, { quoted: businessHeader })
   }
 }
