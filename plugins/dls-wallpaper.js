@@ -4,7 +4,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text?.trim()) {
     return m.reply(
       `🎭 Falta tu búsqueda, sombra...\n\nEjemplos:\n` +
-      `• ${usedPrefix}wp eminence in shadow\n` +
+      `• ${usedPrefix}wp eminence in Bocchi\n` +
       `• ${usedPrefix}wallpaper Navidad`
     );
   }

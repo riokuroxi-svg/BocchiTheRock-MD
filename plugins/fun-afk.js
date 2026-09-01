@@ -19,7 +19,7 @@ export async function before(m, { conn }) {
     thumb = null
   }
 
-  const shadow_xyz = {
+  const Bocchi_xyz = {
     key: {
       remoteJid: 'status@broadcast',
       fromMe: false,
@@ -34,7 +34,7 @@ export async function before(m, { conn }) {
             jpegThumbnail: thumb
           } : undefined,
           title: 'WhatsApp Business • Estado',
-          description: 'Shadow team',
+          description: 'Bocchi team',
           currencyCode: 'USD',
           priceAmount1000: '0',
           retailerId: 'BocchiCore',
@@ -70,7 +70,7 @@ export async function before(m, { conn }) {
           `○ Motivo » *${user.afkReason || 'sin especificar'}*\n` +
           `○ Tiempo ausente » *${tiempo}*`
       },
-      { quoted: shadow_xyz }
+      { quoted: Bocchi_xyz }
     )
 
     user.afk = -1
@@ -104,7 +104,7 @@ export async function before(m, { conn }) {
           `○ Motivo: ${target.afkReason || 'sin especificar'}\n` +
           `○ Tiempo ausente: ${tiempo}`
       },
-      { quoted: shadow_xyz }
+      { quoted: Bocchi_xyz }
     )
   }
 

@@ -98,7 +98,7 @@ Toca el botón para copiar el LID o visitar el canal.
     { 
       name: "cta_url", 
       buttonParamsJson: JSON.stringify({ 
-        display_text: "canal de shadow 🌌", 
+        display_text: "canal de Bocchi 🌌", 
         url: "" 
       })
     }

@@ -4,7 +4,7 @@ const SelloMistico = /\|?(.*)([.|] *?)([0-9]*)$/i
 
 let handler = async function (m, { conn, text, usedPrefix, command }) {
   const who = m.mentionedJid?.[0] || (m.fromMe ? conn.user.jid : m.sender)
-  const pp = await conn.profilePictureUrl(who, 'image').catch(() => 'https://raw.githubusercontent.com/Andresv27728/dtbs/main/shadow.jpg')
+  const pp = await conn.profilePictureUrl(who, 'image').catch(() => 'https://raw.githubusercontent.com/Andresv27728/dtbs/main/Bocchi.jpg')
   const user = global.db.data.users[m.sender]
   const name2 = conn.getName(m.sender)
 
@@ -36,7 +36,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
     return m.reply("『☽』 Edad inválida. Debes colocar un número mayor a 5.")
   }
 
-  user.name = `${name}⋆⟡Shadow⟡⋆`
+  user.name = `${name}⋆⟡Bocchi⟡⋆`
   user.age = age
   user.regTime = +new Date()
   user.registered = true
@@ -44,7 +44,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
   const sn = createHash('md5').update(m.sender).digest('hex').slice(0, 20)
 
   const certificadoPacto = `
-╭─「 ☽ Pacto Shadow ☽ 」─╮
+╭─「 ☽ Pacto Bocchi ☽ 」─╮
 │ ✧ *Nombre:* ${name}
 │ ✧ *Edad:* ${age} años
 │ ✧ *Sello Único:* ${sn}
@@ -68,7 +68,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
     headerType: 4,
     contextInfo: {
       externalAdReply: {
-        title: '☽ Pacto Shadow Completado ☽',
+        title: '☽ Pacto Bocchi Completado ☽',
         body: 'El poder oculto ha sido sellado...',
         thumbnailUrl: pp,
         mediaType: 1,
@@ -80,7 +80,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
   await conn.sendMessage(m.chat, {
     document: { url: 'https://files.catbox.moe/zbyywc.jpg' }, 
     mimetype: 'application/pdf', 
-    fileName: '☽ Pacto Shadow ☽',
+    fileName: '☽ Pacto Bocchi ☽',
     caption: '『📜』 El pacto ha sido sellado con éxito...'
   }, { quoted: m })
 }

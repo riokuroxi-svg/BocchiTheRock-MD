@@ -32,7 +32,7 @@ https://whatsapp.com/channel/0029VbBIgz1HrDZg92ISUl2M
 ✅ *COMUNIDAD OFICIAL*
 https://chat.whatsapp.com/ETHW7aP7kOICrR2RBrfE6N
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-👑 Creador Principal: +58 424-2773183 (Yosue)
+👑 Creador Principal: +58 424-2773183 (Bocchi Dev)
 ⚔️ Segundo Creador: +504 9373-2693 (Ado)
 🤩 Colaborador: +51 900 373 696 (Gian Pool)
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

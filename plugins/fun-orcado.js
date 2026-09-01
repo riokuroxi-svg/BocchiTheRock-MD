@@ -1,4 +1,4 @@
-// 👻 Juego del Ahorcado Bocchi Garden + Navidad echo por yosue uwu osea shadow 👻
+// 👻 Juego del Ahorcado Bocchi Garden + Navidad echo por bocchi-dev uwu osea Bocchi 👻
 let partidas = {} // almacena partidas activas por chat
 
 // Dibujos del ahorcado paso a paso
@@ -69,7 +69,7 @@ let handler = async (m, { command, text }) => {
 
   // Palabras fijas estilo Bocchi Garden + Navidad
   const palabras = [
-    "shadow", "garden", "eminence", "alpha", "beta", "gamma",
+    "Bocchi", "garden", "eminence", "alpha", "beta", "gamma",
     "delta", "epsilon", "zeta", "navidad", "regalo", "nieve",
     "sombras", "trineo", "estrella", "festivo"
   ]

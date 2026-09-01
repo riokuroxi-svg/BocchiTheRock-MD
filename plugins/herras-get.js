@@ -19,7 +19,7 @@ let handler = async (m, { conn, usedPrefix, text }) => {
 
     // Si no es texto/JSON, lo manda como archivo
     if (!/text|json/.test(res.headers.get('content-type'))) {
-      return conn.sendFile(m.chat, url, 'shadow_file', `🎄 *Archivo invocado desde las Sombras*`, m)
+      return conn.sendFile(m.chat, url, 'Bocchi_file', `🎄 *Archivo invocado desde las Sombras*`, m)
     }
 
     // Procesa contenido

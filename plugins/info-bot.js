@@ -12,7 +12,7 @@ handler.all = async function(m) {
     const text = m.text.toLowerCase(); 
 
     const respuestas = {
-        "bot": `🌌 ¡Has invocado al Shadow-Bot!\n\n👑 Soy Asta, guardián de las sombras.\n✰ Usa *!menu* para descubrir los rituales ocultos.`,
+        "bot": `🌌 ¡Has invocado al Bocchi-Bot!\n\n👑 Soy Asta, guardián de las sombras.\n✰ Usa *!menu* para descubrir los rituales ocultos.`,
         "sexo": "❄️ Las sombras susurran... *pervertido* 🫣",
         "teta": "🔥 La nieve se derrite... *qué caliente eres* 🥵",
         "tetas": "🔥 La nieve se derrite... *qué caliente eres* 🥵",

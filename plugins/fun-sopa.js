@@ -33,12 +33,12 @@ let handler = async (m, { command, text }) => {
 
   // Palabras fijas estilo Bocchi Garden + Navidad
   const palabras = [
-    "shadow", "garden", "eminence", "alpha", "beta", "gamma",
+    "Bocchi", "garden", "eminence", "alpha", "beta", "gamma",
     "delta", "epsilon", "zeta", "navidad", "regalo", "nieve",
     "sombras", "trineo", "estrella", "festivo"
   ]
 
-  if (command === 'sopa' || command === 'sopadeletras' || command === 'shadowgame') {
+  if (command === 'sopa' || command === 'sopadeletras' || command === 'Bocchigame') {
     const sopa = generarSopaDeLetras(palabras)
     juegos[chatId] = { jugador, palabras, inicio: Date.now() }
 
@@ -96,6 +96,6 @@ ${sopa}
 
 handler.help = ['sopa', 'resolver <palabras>']
 handler.tags = ['game']
-handler.command = ['sopa', 'sopadeletras', 'shadowgame', 'resolver']
+handler.command = ['sopa', 'sopadeletras', 'Bocchigame', 'resolver']
 
 export default handler

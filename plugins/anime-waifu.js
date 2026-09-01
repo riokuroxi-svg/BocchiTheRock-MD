@@ -5,7 +5,7 @@ const newsletterJid  = '120363403739366547@newsletter'
 const newsletterName = '👑 BocchiTheRock-MD uwu👑 '
 
 const packname = '👑 BocchiTheRock-MD 👑'
-const dev = 'Creado por Yosue'
+const dev = 'Creado por Bocchi Dev'
 const redes = ''
 const icons = 'https://files.catbox.moe/6bgv7s.jpg'
 
@@ -55,7 +55,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
               body: proto.Message.InteractiveMessage.Body.create({ text: caption }),
               footer: proto.Message.InteractiveMessage.Footer.create({ text: '👑 SHADOW BOT MD' }),
               header: proto.Message.InteractiveMessage.Header.create({
-                title: 'Shadow Waifus',
+                title: 'Bocchi Waifus',
                 hasMediaAttachment: true,
                 imageMessage
               }),
@@ -71,7 +71,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
                   {
                     name: 'cta_url',
                     buttonParamsJson: JSON.stringify({
-                      display_text: '🌐 Canal de Shadow',
+                      display_text: '🌐 Canal de Bocchi',
                       url: redes
                     })
                   }

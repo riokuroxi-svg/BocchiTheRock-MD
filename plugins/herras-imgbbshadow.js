@@ -16,14 +16,14 @@ async function sendCustomPedido(m, conn, texto) {
       status: 1,
       surface: 1,
       message: texto,
-      orderTitle: '🌑 Shadow - Catálogo 🎄',
+      orderTitle: '🌑 Bocchi - Catálogo 🎄',
       token: null,
       sellerJid: null,
       totalAmount1000: '0',
       totalCurrencyCode: 'VES',
       contextInfo: {
         externalAdReply: {
-          title: "Menú Shadow 🎄",
+          title: "Menú Bocchi 🎄",
           body: "Comando para imágenes",
           thumbnailUrl: img,
           mediaType: 1,
@@ -51,7 +51,7 @@ const handler = async (m, { conn, text, command }) => {
     return sendCustomPedido(
       m,
       conn,
-      `🌑 *Menú Shadow* 🌑\n\n🎄 Recuerden que este poder es para subir imágenes a las Sombras 🎄\n> Att: Shadow\n\n🚩 Adjunta o cita una *imagen* para invocar la subida.`
+      `🌑 *Menú Bocchi* 🌑\n\n🎄 Recuerden que este poder es para subir imágenes a las Sombras 🎄\n> Att: Bocchi\n\n🚩 Adjunta o cita una *imagen* para invocar la subida.`
     )
   }
 
@@ -85,7 +85,7 @@ const handler = async (m, { conn, text, command }) => {
 ✨ *Tamaño:* ${(result.size / 1024).toFixed(2)} KB
 ⛄ *Expiración:* ${result.expiration ? `${result.expiration} s` : 'Nunca'}
 
-> Att: Shadow 🎄`
+> Att: Bocchi 🎄`
 
       return sendCustomPedido(m, conn, replyText)
     } else {
@@ -99,7 +99,7 @@ const handler = async (m, { conn, text, command }) => {
   }
 }
 
-handler.help = ['imgbbshadow']
+handler.help = ['imgbbBocchi']
 handler.tags = ['tools']
-handler.command = ['imgbbshadow', 'uploadshadow']
+handler.command = ['imgbbBocchi', 'uploadBocchi']
 export default handler

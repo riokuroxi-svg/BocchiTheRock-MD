@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 
 const handler = async (m, { conn, participants, groupMetadata }) => {
   const chat = global.db.data.chats[m.chat];
-  const pp = await conn.profilePictureUrl(m.chat, 'image').catch(() => 'https://raw.githubusercontent.com/Andresv27728/dtbs/main/shadow.jpg');
+  const pp = await conn.profilePictureUrl(m.chat, 'image').catch(() => 'https://raw.githubusercontent.com/Andresv27728/dtbs/main/Bocchi.jpg');
 
   const {
     antiLink, detect, welcome, sWelcome, sBye,

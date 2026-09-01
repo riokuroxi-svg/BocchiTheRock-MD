@@ -6,7 +6,7 @@ import fs from "fs"
 global.botNumber = "" 
 
 global.owner = [
-["584242773183", "yosue </>", true],
+["584242773183", "bocchi-dev </>", true],
 ["51921826291"],
 ["523328418129"],
 ["5216242255295"],
@@ -25,14 +25,14 @@ global.prems = []
 
 global.libreria = "Baileys Multi Device"
 global.vs = "^1.3.2"
-global.nameqr = "ShadowBot"
+global.nameqr = "BocchiBot"
 global.sessions = "Sessions/Principal"
 global.jadi = "Sessions/SubBot"
 global.MichiJadibts = false
 
 global.multiplier = 1
 global.botname = "BocchiTheRock-MD"
-global.textbot = "Shadow-BOT, yosue"
+global.textbot = "Bocchi-BOT, bocchi-dev"
 global.dev = "BocchiTheRock-MD"
 global.author = "*BocchiTheRock-MD* © mᥲძᥱ ᥕі𝗍һ 𝙮𝙤𝙨𝙪𝙚"
 global.etiqueta = "© 𝙮𝙤𝙨𝙪𝙚 | 𝟤𝟢𝟤𝟧"

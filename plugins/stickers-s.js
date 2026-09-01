@@ -170,7 +170,7 @@ let handler = async (m, { conn, args }) => {
     let stickerBuffer = await fs.promises.readFile(output)
 
     const packName = global.packsticker || 'BocchiTheRock-MD'
-    const author = global.dev || 'yosue'
+    const author = global.dev || 'bocchi-dev'
     stickerBuffer = await addExif(stickerBuffer, packName, author)
 
     await conn.sendMessage(from, { sticker: stickerBuffer }, { quoted: m })

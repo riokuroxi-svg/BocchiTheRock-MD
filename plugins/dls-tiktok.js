@@ -30,11 +30,11 @@ var handler = async (m, { conn, args, usedPrefix, command }) => {
     }
 
     const videoURL = tiktokData.data.play
-    const shadowInfo = `📜 Fragmento extraído:\n> ${tiktokData.data.title || 'Sin título'}`
+    const BocchiInfo = `📜 Fragmento extraído:\n> ${tiktokData.data.title || 'Sin título'}`
 
     // Header tipo WhatsApp Business (miniatura + descripción debajo)
     const businessHeader = {
-      key: { remoteJid: m.chat, participant: '0@s.whatsapp.net', fromMe: false, id: 'ShadowHeader' },
+      key: { remoteJid: m.chat, participant: '0@s.whatsapp.net', fromMe: false, id: 'BocchiHeader' },
       message: {
         locationMessage: {
           name: '𝙩𝙞𝙠𝙩𝙤𝙠 👑',
@@ -42,12 +42,12 @@ var handler = async (m, { conn, args, usedPrefix, command }) => {
           vcard:
             'BEGIN:VCARD\n' +
             'VERSION:3.0\n' +
-            'N:;Shadow;;;\n' +
-            'FN:Shadow\n' +
+            'N:;Bocchi;;;\n' +
+            'FN:Bocchi\n' +
             'ORG:Bocchi the Rock!\n' +
             'TITLE:\n' +
             'item1.TEL;waid=5804242773183:+58 0424-2773183\n' +
-            'item1.X-ABLabel:Shadow\n' +
+            'item1.X-ABLabel:Bocchi\n' +
             'X-WA-BIZ-DESCRIPTION:Archivo invocado desde el Reino de las Sombras\n' +
             'X-WA-BIZ-NAME:Bocchi Garden\n' +
             'END:VCARD'
@@ -58,7 +58,7 @@ var handler = async (m, { conn, args, usedPrefix, command }) => {
 
     const media = await generateWAMessageContent({
       video: { url: videoURL },
-      caption: 'TRANSMISIÓN COMPLETADA - ARCHIVO DE LAS SOMBRAS\n\n' + shadowInfo
+      caption: 'TRANSMISIÓN COMPLETADA - ARCHIVO DE LAS SOMBRAS\n\n' + BocchiInfo
     }, { upload: conn.waUploadToServer, jid: m.chat })
 
     const msg = generateWAMessageFromContent(m.chat, {
@@ -69,7 +69,7 @@ var handler = async (m, { conn, args, usedPrefix, command }) => {
             deviceListMetadataVersion: 2
           },
           interactiveMessage: proto.Message.InteractiveMessage.fromObject({
-            body: { text: 'TRANSMISIÓN COMPLETADA - ARCHIVO DE LAS SOMBRAS\n\n' + shadowInfo },
+            body: { text: 'TRANSMISIÓN COMPLETADA - ARCHIVO DE LAS SOMBRAS\n\n' + BocchiInfo },
             footer: { text: '⚔️ Bocchi Garden' },
             header: {
               hasMediaAttachment: true,
@@ -82,7 +82,7 @@ var handler = async (m, { conn, args, usedPrefix, command }) => {
                   name: 'cta_copy',
                   buttonParamsJson: JSON.stringify({
                     display_text: 'Copiar',
-                    copy_code: '*I LOVE yosue Shadow-Bot uwu*'
+                    copy_code: '*I LOVE bocchi-dev Bocchi-Bot uwu*'
                   })
                 },
                 {

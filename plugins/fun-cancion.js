@@ -58,10 +58,10 @@ Las sombras susurran melodías ocultas...
 
   const aa = await conn.sendMessage(
     m.chat,
-    { audio: { url: json.link_song }, fileName: 'shadow-song.mp3', mimetype: 'audio/mpeg' },
+    { audio: { url: json.link_song }, fileName: 'Bocchi-song.mp3', mimetype: 'audio/mpeg' },
     { quoted: m }
   )
-  if (!aa) return conn.sendFile(m.chat, json.link_song, 'shadow-song.mp3', '', m)
+  if (!aa) return conn.sendFile(m.chat, json.link_song, 'Bocchi-song.mp3', '', m)
 }
 
 handler.help = ['cancion', 'canción']

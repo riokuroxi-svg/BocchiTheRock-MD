@@ -16,7 +16,7 @@ let handler = async (m, { conn, text, usedPrefix }) => {
     const smallThumb = await (await fetch("https://i.postimg.cc/rFfVL8Ps/image.jpg")).buffer()
 
     const businessHeader = {
-      key: { participants: "0@s.whatsapp.net", fromMe: false, id: "ShadowYT" },
+      key: { participants: "0@s.whatsapp.net", fromMe: false, id: "BocchiYT" },
       message: {
         locationMessage: {
           name: "🔍 YouTube Search",

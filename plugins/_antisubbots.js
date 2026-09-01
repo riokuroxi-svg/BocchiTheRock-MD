@@ -48,7 +48,7 @@ export async function before(m, { participants, conn }) {
         try {
             await conn.reply(
                 m.chat,
-                '🥀 En este grupo está ya está shadow el bot principal haci que me saldré y haci evito spam byes a todos shadow subbot se despide 👋.',
+                '🥀 En este grupo está ya está Bocchi el bot principal haci que me saldré y haci evito spam byes a todos Bocchi subbot se despide 👋.',
                 m
             )
             await conn.groupLeave(m.chat)

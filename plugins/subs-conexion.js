@@ -541,7 +541,7 @@ export async function MichiJadiBot(options) {
       if (!global.conns.includes(sock)) global.conns.push(sock)
       const targetChat = m?.chat || userJid
       const userSender = m?.sender || userJid
-      await conn.sendMessage(targetChat, { text: isSubBotConnected(userSender) ? `> @${userSender.split('@')[0]}, ❐ Has registrado un nuevo _shadow_ *Sub-Bot* 👻` : `> ❀ Has registrado un nuevo *Sub-Bot!* [@${userSender.split('@')[0]}]`, mentions: [userSender] }, { quoted: m || null })
+      await conn.sendMessage(targetChat, { text: isSubBotConnected(userSender) ? `> @${userSender.split('@')[0]}, ❐ Has registrado un nuevo _Bocchi_ *Sub-Bot* 👻` : `> ❀ Has registrado un nuevo *Sub-Bot!* [@${userSender.split('@')[0]}]`, mentions: [userSender] }, { quoted: m || null })
     }
   }
 

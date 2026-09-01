@@ -45,7 +45,7 @@ let { say } = cfonts
 
 function showStartupDesign() {
   console.clear()
-  say('ShadowBot', {
+  say('BocchiBot', {
     font: 'block',
     align: 'center',
     colors: ['cyan', 'magenta'],
@@ -61,7 +61,7 @@ function showStartupDesign() {
   })
   console.log('\n' + boxen(
     chalk.cyanBright.bold('  ✦ Sistema listo para iniciar ✦\n\n') +
-    chalk.white('  Bot          ') + chalk.magenta('ShadowBot\n') +
+    chalk.white('  Bot          ') + chalk.magenta('BocchiBot\n') +
     chalk.white('  Plataforma   ') + chalk.magenta('WhatsApp Multi-Device\n') +
     chalk.white('  Node.js      ') + chalk.magenta(process.version),
     {
@@ -328,7 +328,7 @@ if (opts['autocleartmp'] && (global.support || {}).find) (tmp = [os.tmpdir(), 't
 }, 30 * 1000)
 }
 
-const lidCache = global.__shadowLidCache || (global.__shadowLidCache = new Map())
+const lidCache = global.__BocchiLidCache || (global.__BocchiLidCache = new Map())
 
 async function resolveLidToRealJid(lidJid, groupJid, maxRetries = 3, retryDelay = 1000) {
 if (!lidJid?.endsWith("@lid") || !groupJid?.endsWith("@g.us")) return lidJid?.includes("@") ? lidJid : `${lidJid}@s.whatsapp.net`
@@ -448,7 +448,7 @@ await joinChannels(conn)
   const number = conn.user.id?.split(':')[0]?.split('@')[0] || '—'
   console.log('\n' + boxen(
     chalk.greenBright.bold('  ✦ BOT CONECTADO EXITOSAMENTE ✦\n\n') +
-    chalk.white('  🤖 Bot        ') + chalk.cyan('ShadowBot\n') +
+    chalk.white('  🤖 Bot        ') + chalk.cyan('BocchiBot\n') +
     chalk.white('  👤 Cuenta     ') + chalk.cyan(userName) + '\n' +
     chalk.white('  📱 Número     ') + chalk.cyan(number) + '\n' +
     chalk.white('  🟢 Node.js    ') + chalk.cyan(process.version) + '\n' +

@@ -7,7 +7,7 @@ import moment from 'moment-timezone'
 var handler = m => m
 handler.all = async function (m) { 
   global.canalIdM = ["120363403739366547@newsletter", "120363403739366547@newsletter"]
-  global.canalNombreM = ["BocchiTheRock-MD canal uwu", "yosue canal uwu"]
+  global.canalNombreM = ["BocchiTheRock-MD canal uwu", "bocchi-dev canal uwu"]
   global.channelRD = await getRandomChannel()
 
   global.d = new Date(Date.now() + 3600000)

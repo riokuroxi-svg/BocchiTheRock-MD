@@ -37,18 +37,18 @@ function handler(m, { conn, text }) {
     'z': 'mori'
   }
 
-  let nombreShadow = teks.replace(/[a-z]/gi, v => diccionario[v.toLowerCase()] || v)
+  let nombreBocchi = teks.replace(/[a-z]/gi, v => diccionario[v.toLowerCase()] || v)
 
   m.reply(
 `🎭❄️ *Nombre invocado:* ${text}
-🌌🎄 *Tu identidad en el Bocchi Garden:* ${nombreShadow}
+🌌🎄 *Tu identidad en el Bocchi Garden:* ${nombreBocchi}
 
 🕯️✨ *Las sombras festivas te han otorgado tu título secreto...*`
   )
 }
 
-handler.help = ['nombreshadow *<texto>*']
+handler.help = ['nombreBocchi *<texto>*']
 handler.tags = ['fun']
-handler.command = ['nombreshadow', 'nombreninja', 'shadowgarden']
+handler.command = ['nombreBocchi', 'nombreninja', 'Bocchigarden']
 
 export default handler

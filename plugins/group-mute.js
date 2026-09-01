@@ -48,7 +48,7 @@ const handler = async (m, { conn, command, text, isAdmin }) => {
             : 'https://telegra.ph/file/aea704d0b242b8c41bf15.png'
         )).buffer(),
         vcard:
-          'BEGIN:VCARD\nVERSION:3.0\nN:;Shadow;;;\nFN:Shadow\nORG:Bocchi the Rock!\nTITLE:\nitem1.TEL;waid=19709001746:+1 (970) 900-1746\nitem1.X-ABLabel:Shadow\nX-WA-BIZ-DESCRIPTION:Reino de las Sombras\nX-WA-BIZ-NAME:Shadow\nEND:VCARD'
+          'BEGIN:VCARD\nVERSION:3.0\nN:;Bocchi;;;\nFN:Bocchi\nORG:Bocchi the Rock!\nTITLE:\nitem1.TEL;waid=OWNER_NUMBER:+1 (970) 900-1746\nitem1.X-ABLabel:Bocchi\nX-WA-BIZ-DESCRIPTION:Reino de las Sombras\nX-WA-BIZ-NAME:Bocchi\nEND:VCARD'
       }
     },
     participant: '0@s.whatsapp.net'

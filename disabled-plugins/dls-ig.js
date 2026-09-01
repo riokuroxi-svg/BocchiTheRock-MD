@@ -11,7 +11,7 @@ const handler = async (m, { args, conn, usedPrefix }) => {
 
     if (m.react) await m.react('🕒')
 
-    const api = `https://apiyosoyyo-ofc.onrender.com/api/instagram?url=${encodeURIComponent(args[0])}&apiKey=shadow_sk_67jp1six`
+    const api = `https://apiyosoyyo-ofc.onrender.com/api/instagram?url=${encodeURIComponent(args[0])}&apiKey=Bocchi_sk_67jp1six`
     const res = await fetch(api)
     const json = await res.json()
 

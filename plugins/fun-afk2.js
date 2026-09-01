@@ -13,7 +13,7 @@ const handler = async (m, { conn, text }) => {
     thumb = null
   }
 
-  const shadow_xyz = {
+  const Bocchi_xyz = {
     key: {
       remoteJid: "status@broadcast",
       fromMe: false,
@@ -30,7 +30,7 @@ const handler = async (m, { conn, text }) => {
               }
             : undefined,
           title: "WhatsApp Business • Estado",
-          description: "Shadow team",
+          description: "Bocchi team",
           currencyCode: "USD",
           priceAmount1000: '0',
           retailerId: "BocchiCore",
@@ -49,7 +49,7 @@ const handler = async (m, { conn, text }) => {
         `Has entrado en estado AFK.\n` +
         `○ Motivo » *${text || 'sin especificar'}*`
     },
-    { quoted: shadow_xyz }
+    { quoted: Bocchi_xyz }
   )
 }
 

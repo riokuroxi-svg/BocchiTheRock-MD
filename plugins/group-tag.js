@@ -79,7 +79,7 @@ const handler = async (m, { conn, args }) => {
             description: "Notificación General", 
             currencyCode: "USD",
             priceAmount1000: '0',
-            retailerId: "Shadow",
+            retailerId: "Bocchi",
             productImageCount: 1
           },
           businessOwnerJid: "0@s.whatsapp.net"

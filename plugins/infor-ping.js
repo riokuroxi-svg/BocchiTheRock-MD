@@ -34,8 +34,8 @@ let handler = async (m, { conn }) => {
     const ss   = String(Math.floor(up % 60)).padStart(2, '0')
     const uptimeText = `${hh}:${mm}:${ss}`
 
-    const shadowPath   = path.join(process.cwd(), 'lib', 'Shadow.webp')
-    const shadowBuffer = fs.existsSync(shadowPath) ? fs.readFileSync(shadowPath) : null
+    const BocchiPath   = path.join(process.cwd(), 'lib', 'Bocchi.webp')
+    const BocchiBuffer = fs.existsSync(BocchiPath) ? fs.readFileSync(BocchiPath) : null
 
     const W = 1600
     const H = 900
@@ -80,8 +80,8 @@ let handler = async (m, { conn }) => {
     <stop offset="50%" stop-color="#b060ff" stop-opacity="0.6"/>
     <stop offset="100%" stop-color="#f0c040" stop-opacity="0.8"/>
   </linearGradient>
-  <filter id="panelShadow" x="-5%" y="-5%" width="110%" height="115%">
-    <feDropShadow dx="0" dy="6" stdDeviation="24" flood-color="#000000" flood-opacity="0.75"/>
+  <filter id="panelBocchi" x="-5%" y="-5%" width="110%" height="115%">
+    <feDropBocchi dx="0" dy="6" stdDeviation="24" flood-color="#000000" flood-opacity="0.75"/>
   </filter>
   <filter id="blur40">
     <feGaussianBlur stdDeviation="40"/>
@@ -138,7 +138,7 @@ let handler = async (m, { conn }) => {
 
 <rect x="60" y="185" width="660" height="640" rx="22"
       fill="url(#panelL)" stroke="#f0c040" stroke-opacity="0.18" stroke-width="1.5"
-      filter="url(#panelShadow)"/>
+      filter="url(#panelBocchi)"/>
 <rect x="60" y="185" width="660" height="52" rx="22" fill="#f0c040" fill-opacity="0.07"/>
 <rect x="60" y="207" width="660" height="30" fill="#f0c040" fill-opacity="0.07"/>
 <text x="88" y="221"
@@ -213,7 +213,7 @@ let handler = async (m, { conn }) => {
 
 <rect x="740" y="185" width="500" height="640" rx="22"
       fill="url(#panelR)" stroke="#b060ff" stroke-opacity="0.18" stroke-width="1.5"
-      filter="url(#panelShadow)"/>
+      filter="url(#panelBocchi)"/>
 <rect x="740" y="185" width="500" height="52" rx="22" fill="#b060ff" fill-opacity="0.07"/>
 <rect x="740" y="207" width="500" height="30" fill="#b060ff" fill-opacity="0.07"/>
 <text x="768" y="221"
@@ -278,7 +278,7 @@ let handler = async (m, { conn }) => {
       letter-spacing="3" opacity="0.65">OWNER</text>
 <text x="784" y="701"
       fill="#ffffff" font-size="24" font-weight="700"
-      font-family="'Arial Black', sans-serif">Yosue <tspan fill="#f0c040">(Shadow)</tspan> &amp; Ado</text>
+      font-family="'Arial Black', sans-serif">Bocchi Dev <tspan fill="#f0c040">(Bocchi)</tspan> &amp; Ado</text>
 
 <rect x="1258" y="168" width="6" height="662"
       fill="url(#purpleG)" opacity="0.25" filter="url(#blur20)"/>
@@ -296,8 +296,8 @@ let handler = async (m, { conn }) => {
 
     let compositor = sharp(Buffer.from(svg)).png()
 
-    if (shadowBuffer) {
-      const char = await sharp(shadowBuffer)
+    if (BocchiBuffer) {
+      const char = await sharp(BocchiBuffer)
         .resize(290, 680, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
         .toBuffer()
 
@@ -313,7 +313,7 @@ let handler = async (m, { conn }) => {
         participants: '0@s.whatsapp.net',
         remoteJid: 'status@broadcast',
         fromMe: false,
-        id: 'ShadowPing'
+        id: 'BocchiPing'
       },
       message: {
         contactMessage: {
@@ -328,7 +328,7 @@ let handler = async (m, { conn }) => {
     await conn.sendMessage(m.chat, {
       image,
       caption: `✨ ¡𝐏𝐎𝐍𝐆! ✨\n\n> 🌌 𝐓𝐢𝐞𝐦𝐩𝐨: ${ping}𝐦𝐬\n> 👤 𝐔𝐬𝐮𝐚𝐫𝐢𝐨: ${userName} (@${userNum})\n> 👑 𝐃𝐮𝐞𝐧̃𝐨𝐬: 𝐘𝐨𝐬𝐮𝐞 (𝐒𝐡𝐚𝐝𝐨𝐰) & 𝐀𝐝𝐨\n> 🏎️ 𝐋𝐢𝐧𝐮𝐱 𝐒𝐩𝐞𝐞𝐝: 𝐌𝐚́𝐱𝐢𝐦𝐚 𝐕𝐞𝐥𝐨𝐜𝐢𝐝𝐚𝐝 🚀\n\n*જ 𝐒𝐡𝐚𝐝𝐨𝐰 𝐆𝐚𝐫𝐝𝐞𝐧 𝐈𝐧𝐭𝐞𝐫𝐟𝐚𝐜𝐞 🧪 𖤓*`,
-      footer: `© ${botname} · Pong shadow`,
+      footer: `© ${botname} · Pong Bocchi`,
       mentions: [userId]
     }, { quoted: fkontak })
 

@@ -7,7 +7,7 @@ import { generateWAMessageFromContent } from '@whiskeysockets/baileys'
 let handler = async (m, { conn, text, usedPrefix }) => {
 if (!m.quoted && !text) return conn.reply(m.chat, `🌌 Escribe el texto que deseas repetir.`, m)
 let mentionedJid = await m.mentionedJid
-let htextos = text ? text : (m.quoted && m.quoted.text) ? m.quoted.text : "Soy Shadow..."
+let htextos = text ? text : (m.quoted && m.quoted.text) ? m.quoted.text : "Soy Bocchi..."
 if ((mentionedJid && mentionedJid.length) || (m.quoted && m.quoted.mentionedJid && m.quoted.mentionedJid.length)) {
 let copy = htextos
 let list = mentionedJid || m.quoted.mentionedJid

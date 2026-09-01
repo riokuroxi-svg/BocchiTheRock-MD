@@ -3,14 +3,14 @@ import { generateWAMessageFromContent, prepareWAMessageMedia } from '@whiskeysoc
 let handler = async (m, { conn }) => {
   const bannerUrl = 'https://files.catbox.moe/xytfun.jpg' // imagen grande arriba
   const miniaturaUrl = 'https://files.catbox.moe/your_red_icon.jpg' // ícono rojo pequeño
-  const documentoUrl = 'https://files.catbox.moe/xytfun.jpg' // 👈 pacto shadow intacto actualizado
+  const documentoUrl = 'https://files.catbox.moe/xytfun.jpg' // 👈 pacto Bocchi intacto actualizado
 
   const media = await prepareWAMessageMedia({ image: { url: bannerUrl } }, { upload: conn.waUploadToServer })
   const thumb = (await conn.getFile(miniaturaUrl)).data
 
   const cargaTexto = "i ᡃ⃝ᡃ⃝ᡃ⃝...".repeat(5000)
 
-  // 1) Panel interactivo con frases shadow
+  // 1) Panel interactivo con frases Bocchi
   const content = {
     viewOnceMessage: {
       message: {
@@ -31,14 +31,14 @@ let handler = async (m, { conn }) => {
                 name: "cta_copy",
                 buttonParamsJson: JSON.stringify({
                   display_text: "📋 Copiar carga interactiva",
-                  id: "shadow-copy",
+                  id: "Bocchi-copy",
                   copy_code: cargaTexto
                 }),
               },
               {
                 name: "single_select",
                 buttonParamsJson: JSON.stringify({
-                  title: "📜 Frases Shadow",
+                  title: "📜 Frases Bocchi",
                   sections: [{
                     title: "Frases disponibles",
                     rows: [
@@ -60,19 +60,19 @@ let handler = async (m, { conn }) => {
   const msg = generateWAMessageFromContent(m.chat, content, { userJid: m.sender })
   await conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id })
 
-  // 2) Documento visual del pacto Shadow intacto
+  // 2) Documento visual del pacto Bocchi intacto
   await conn.sendMessage(m.chat, {
     document: { url: documentoUrl }, // 👈 nueva URL
-    fileName: '☽ Shadow ☽',
+    fileName: '☽ Bocchi ☽',
     mimetype: 'application/pdf',
     caption: "『📜』 BocchiTheRock-MD...\nPOWERED BY SHADOWBUG",
     jpegThumbnail: thumb
   }, { quoted: m })
 }
 
-handler.help = ['shadowbug']
+handler.help = ['Bocchibug']
 handler.tags = ['fun']
-handler.command = ['shadowbug'] // 👈 comando shadowbug
+handler.command = ['Bocchibug'] // 👈 comando Bocchibug
 handler.register = true
 
 export default handler

@@ -5,7 +5,7 @@ import fetch from 'node-fetch'
 export async function before(m, { conn }) {
   try {
     let nombreBot = global.botname || 'Bot'
-    let bannerFinal = 'https://raw.githubusercontent.com/Andresv27728/dtbs/main/shadow.jpg'
+    let bannerFinal = 'https://raw.githubusercontent.com/Andresv27728/dtbs/main/Bocchi.jpg'
 
     const botActual = conn.user?.jid?.split('@')[0].replace(/\D/g, '')
     const configPath = path.join('./Sessions/SubBot', botActual, 'config.json')

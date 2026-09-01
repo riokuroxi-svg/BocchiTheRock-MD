@@ -2,7 +2,7 @@ import fs from 'fs'
 import { prepareWAMessageMedia, generateWAMessageFromContent } from "@whiskeysockets/baileys"
 
 const botname = "BocchiTheRock-MD"
-const channelRD = global.channelRD || { id: "0@newsletter", name: "Shadow Channel" }
+const channelRD = global.channelRD || { id: "0@newsletter", name: "Bocchi Channel" }
 
 let handler = async (m, { conn, usedPrefix }) => {
   try {

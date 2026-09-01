@@ -17,7 +17,7 @@ let handler = async (m, { conn, command, isAdmin, isGroupAdmins }) => {
   const thumb = await (await fetch(selectedImage)).buffer()
 
   const businessHeader = {
-    key: { participants: '0@s.whatsapp.net', fromMe: false, id: 'ShadowGroup' },
+    key: { participants: '0@s.whatsapp.net', fromMe: false, id: 'BocchiGroup' },
     message: {
       locationMessage: {
         name: `⚔️ ${action.toUpperCase()} — Bocchi Garden`,
@@ -25,8 +25,8 @@ let handler = async (m, { conn, command, isAdmin, isGroupAdmins }) => {
         vcard:
           'BEGIN:VCARD\n' +
           'VERSION:3.0\n' +
-          'N:;Shadow Group;;;\n' +
-          'FN:Shadow Group\n' +
+          'N:;Bocchi Group;;;\n' +
+          'FN:Bocchi Group\n' +
           'ORG:Bocchi Garden\n' +
           'TITLE:\n' +
           'item1.TEL;waid=5804242773183:+58 0424-2773183\n' +

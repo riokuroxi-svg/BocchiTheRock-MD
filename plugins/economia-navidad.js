@@ -30,7 +30,7 @@ var handler = async (m, { conn }) => {
 ┗━━━━━━━━━━━━━━━━━━━┛
 
 ✨ En las sombras de la Navidad,
-Shadow te recompensa con su poder oculto...
+Bocchi te recompensa con su poder oculto...
 
 💸 Has recibido: *${coinReward} pesos*
 

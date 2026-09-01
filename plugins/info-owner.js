@@ -7,12 +7,12 @@ const handler = async (m, { conn }) => {
 
     const creators = [
       {
-        name: "Yosue",
+        name: "Bocchi Dev",
         role: "Owner Principal",
         number: "584242773183",
         image: "https://i.ibb.co/3NfYh9k/default-avatar.png",
         description: "Creador principal y encargado del desarrollo general.\n\n🌐 GitHub: github.com/riokuroxi-svg\n📢 Canal: \n📦 Repo: https://github.com/riokuroxi-svg/BocchiTheRock-MD.git",
-        btnLabel: "Canal de Yosue",
+        btnLabel: "Canal de Bocchi Dev",
         btnUrl: ""
       },
       {

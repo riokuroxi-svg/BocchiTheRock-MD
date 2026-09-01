@@ -51,7 +51,7 @@ const handler = async (m, { conn, text, command, usedPrefix }) => {
                 text: `jajajaja este wey te dejaste esclavizar que pendejo pero bueno aquí tienes 3 opciones elije sabíamente u.u\n\n Elige tu destino antes de que sea tarde...`
               },
               footer: {
-                text: 'Shadow Juego - Sistema de Esclavitud'
+                text: 'Bocchi Juego - Sistema de Esclavitud'
               },
               header: {
                 hasMediaAttachment: false

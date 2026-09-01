@@ -12,7 +12,7 @@ const delay = ms => isNumber(ms) && new Promise(resolve => setTimeout(resolve, m
 const printModule = await import("../lib/print.js").then(m => m.default).catch(() => null);
 
 const prefixCache = new Map();
-const groupMetadataCache = global.__shadowGroupMetadataCache || (global.__shadowGroupMetadataCache = new Map());
+const groupMetadataCache = global.__BocchiGroupMetadataCache || (global.__BocchiGroupMetadataCache = new Map());
 const GROUP_METADATA_TTL = 30 * 1000;
 
 function normalizeJid(jid, conn) {

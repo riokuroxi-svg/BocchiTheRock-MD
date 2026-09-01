@@ -17,7 +17,7 @@ const handler = async (m, { conn, text, command, usedPrefix }) => {
       itemCount: 1,
       status: 1,
       surface: 1,
-      message: `🕸️ *ACCESO DENEGADO*\n\nHola @${m.sender.split('@')[0]}, debes estar registrado.\n\n🔐 Usa: *${usedPrefix}reg shadow.18*`,
+      message: `🕸️ *ACCESO DENEGADO*\n\nHola @${m.sender.split('@')[0]}, debes estar registrado.\n\n🔐 Usa: *${usedPrefix}reg Bocchi.18*`,
       orderTitle: 'Registro Requerido',
       totalAmount1000: '0',
       totalCurrencyCode: 'GTQ',

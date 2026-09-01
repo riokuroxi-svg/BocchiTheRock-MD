@@ -31,7 +31,7 @@ export async function before(m, { conn, isOwner, isROwner}) {
         await m.reply(`
 🌌 *[PROCEDIMIENTO SOMBRA: BLOQUEO FINAL]* 💀
 ══════════════════════
-🔍 *Unidad de rastreo: Shadow Protocol v2.0*
+🔍 *Unidad de rastreo: Bocchi Protocol v2.0*
 📛 Entidad detectada: ${numero}
 📄 Infracción: Comunicación no autorizada (2/2)
 

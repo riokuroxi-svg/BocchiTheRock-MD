@@ -7,7 +7,7 @@ const {
 let handler = async (m, { conn}) => {
   try {
     const botname = 'BocchiTheRock-MD';
-    const botname2 = 'shadow';
+    const botname2 = 'Bocchi';
     const monedas = 'Pesos';
     const banner = 'https://files.catbox.moe/7mpqeg.jpg';
     const prefijos = './#!';
@@ -33,7 +33,7 @@ let handler = async (m, { conn}) => {
     }).replace(/^./, m => m.toUpperCase());
 
     const botType = 'Principal/Owner';
-    const duenos = 'yosue y ado';
+    const duenos = 'bocchi-dev y ado';
 
     const message = `💜 Información del bot ${botname2}
 
@@ -68,8 +68,8 @@ let handler = async (m, { conn}) => {
           newsletterName: canalName
         },
         externalAdReply: {
-          title: 'shadow-bot',
-          body: `${botname2}. 𝘞𝘪𝘵𝘩 𝘓𝘰𝘷𝘦 𝘉𝘺 yosue`,
+          title: 'Bocchi-bot',
+          body: `${botname2}. 𝘞𝘪𝘵𝘩 𝘓𝘰𝘷𝘦 𝘉𝘺 bocchi-dev`,
           thumbnailUrl: banner,
           mediaType: 1,
           renderLargerThumbnail: true,

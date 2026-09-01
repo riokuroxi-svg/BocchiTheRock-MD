@@ -1,6 +1,6 @@
 let handler = async (m, { conn }) => {
   let header = '┏━━「 *TABLA* 」━━┓\n'
-  let body = '┃ owner 1 : yosue\n┃ owner 2 : ado\n'
+  let body = '┃ owner 1 : bocchi-dev\n┃ owner 2 : ado\n'
   let footer = '┗━━━━━━━━━━━━┛\n> canal: '
   await conn.reply(m.chat, header + body + footer, m)
 }

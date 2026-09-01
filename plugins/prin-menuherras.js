@@ -2,7 +2,7 @@ import fs from 'fs'
 import { prepareWAMessageMedia, generateWAMessageFromContent } from "@whiskeysockets/baileys"
 
 const botname = "BocchiTheRock-MD"
-const channelRD = global.channelRD || { id: "0@newsletter", name: "Shadow Channel" }
+const channelRD = global.channelRD || { id: "0@newsletter", name: "Bocchi Channel" }
 
 let handler = async (m, { conn, usedPrefix }) => {
   try {
@@ -39,7 +39,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 *│* .github
 *│* .𝖧𝖽
 *│* .ibtn
-*│* .imgbbshadow
+*│* .imgbbBocchi
 *│* .inspect <enlace>
 *│* .inspeccionar <enlace>
 *│* .idgp

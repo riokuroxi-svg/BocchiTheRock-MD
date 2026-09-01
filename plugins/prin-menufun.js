@@ -2,7 +2,7 @@ import fs from 'fs'
 import { prepareWAMessageMedia, generateWAMessageFromContent } from "@whiskeysockets/baileys"
 
 const botname = "BocchiTheRock-MD"
-const channelRD = global.channelRD || { id: "0@newsletter", name: "Shadow Channel" }
+const channelRD = global.channelRD || { id: "0@newsletter", name: "Bocchi Channel" }
 
 let handler = async (m, { conn, usedPrefix }) => {
   try {
@@ -52,10 +52,10 @@ let handler = async (m, { conn, usedPrefix }) => {
 *│*  .formarpareja
 *│*  .formarpareja5
 *│*  .meme
-*│*  .nombreshadow *<texto>*
+*│*  .nombreBocchi *<texto>*
 *│*  .pedido <mensaje>|<cantidad>
 *│*  .piropo
-*│*  .shadowbug
+*│*  .Bocchibug
 *│*  .top *<texto>*
 *│*  .formartrio @usuario1 @usuario2
 *╰─────────────╯*`.trim()

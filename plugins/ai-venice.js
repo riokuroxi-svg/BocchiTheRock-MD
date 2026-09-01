@@ -123,7 +123,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
                     vcard:
 
-                        'BEGIN:VCARD\nVERSION:3.0\nN:;Venice;;;\nFN:Venice AI\nORG:Outerface\nTITLE:\nitem1.TEL;waid=19709001746:+1 (970) 900-1746\nitem1.X-ABLabel:IA\nX-WA-BIZ-DESCRIPTION:Respuestas inteligentes con estilo sombrío\nX-WA-BIZ-NAME:Venice AI\nEND:VCARD'
+                        'BEGIN:VCARD\nVERSION:3.0\nN:;Venice;;;\nFN:Venice AI\nORG:Outerface\nTITLE:\nitem1.TEL;waid=OWNER_NUMBER:+1 (970) 900-1746\nitem1.X-ABLabel:IA\nX-WA-BIZ-DESCRIPTION:Respuestas inteligentes con estilo sombrío\nX-WA-BIZ-NAME:Venice AI\nEND:VCARD'
 
                 }
 

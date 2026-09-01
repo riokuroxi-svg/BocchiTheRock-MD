@@ -65,7 +65,7 @@ var handler = async (m, { conn, usedPrefix, command, text }) => {
     await conn.sendFile(
       m.chat,
       data.images.jpg.image_url,
-      'shadow_manga.jpg',
+      'Bocchi_manga.jpg',
       animeinfo,
       m
     )

@@ -40,11 +40,11 @@ let handler = async (m, { conn, text }) => {
     caption += `\n\n🌌 Versión: *${vs}*`
     caption += `\n『☽』 En el jardín sombrío, todos responden al llamado de las sombras.`
 
-    const thumbnail = await (await fetch('https://raw.githubusercontent.com/Andresv27728/dtbs/main/shadow.jpg')).buffer()
+    const thumbnail = await (await fetch('https://raw.githubusercontent.com/Andresv27728/dtbs/main/Bocchi.jpg')).buffer()
     const canalOficial = ''
 
     await conn.sendMessage(chatId, {
-      image: { url: 'https://raw.githubusercontent.com/Andresv27728/dtbs/main/shadow.jpg' },
+      image: { url: 'https://raw.githubusercontent.com/Andresv27728/dtbs/main/Bocchi.jpg' },
       caption,
       mentions: mentionIds,
       contextInfo: {

@@ -25,14 +25,14 @@ var handler = async (m, { conn }) => {
 
   let { registered } = user
 
-  const frasesShadow = [
+  const frasesBocchi = [
     'Las sombras vigilan en silencio, su poder nunca se apaga.',
     'El reino oculto observa más allá de la luz.',
     'Quien abraza sus sombras, encuentra la verdadera calma.',
     'Las sombras no descansan, siempre están presentes.',
     'El archivo oculto revela la fuerza del jardín sombrío.'
   ]
-  const fraseElegida = frasesShadow[Math.floor(Math.random() * frasesShadow.length)]
+  const fraseElegida = frasesBocchi[Math.floor(Math.random() * frasesBocchi.length)]
   
   let animacion = `
 〘 *BocchiTheRock-MD — Sistema en Carga* 〙

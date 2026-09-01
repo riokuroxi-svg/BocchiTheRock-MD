@@ -41,7 +41,7 @@ ${pesan}
                     body: 'Responde con .respuesta (id) (Mensaje)',
                     mediaType: 1,
                     renderLargerThumbnail: true,
-                    thumbnailUrl: 'https://files.catbox.moe/ityzkw.jpg', // att:shadow uwu 
+                    thumbnailUrl: 'https://files.catbox.moe/ityzkw.jpg', // att:Bocchi uwu 
                     sourceUrl: channel,
                 }
             }

@@ -21,7 +21,7 @@ let drm2 = ""
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const ShadowJBOptions = {}
+const BocchiJBOptions = {}
 
 const newsletterJid = '120363403739366547@newsletter'
 const newsletterName = '👑 BocchiTheRock-MD| ᴄʜᴀɴɴᴇʟ-ʙᴏᴛ 🌌'
@@ -37,17 +37,17 @@ let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
     }
 
     let id = `${who.split`@`[0]}`
-    let pathShadowJadiBot = path.join(`./jadibot-sessions/`, id)
+    let pathBocchiJadiBot = path.join(`./jadibot-sessions/`, id)
     
-    ShadowJBOptions.pathShadowJadiBot = pathShadowJadiBot
-    ShadowJBOptions.m = m
-    ShadowJBOptions.conn = conn
-    ShadowJBOptions.args = args
-    ShadowJBOptions.usedPrefix = usedPrefix
-    ShadowJBOptions.command = command
-    ShadowJBOptions.userToSendCode = who 
+    BocchiJBOptions.pathBocchiJadiBot = pathBocchiJadiBot
+    BocchiJBOptions.m = m
+    BocchiJBOptions.conn = conn
+    BocchiJBOptions.args = args
+    BocchiJBOptions.usedPrefix = usedPrefix
+    BocchiJBOptions.command = command
+    BocchiJBOptions.userToSendCode = who 
     
-    await ShadowJadiBot(ShadowJBOptions)
+    await BocchiJadiBot(BocchiJBOptions)
 } 
 
 handler.help = ['darcode <@user|number>']
@@ -55,15 +55,15 @@ handler.tags = ['owner']
 handler.command = ['darcode']
 export default handler 
 
-export async function ShadowJadiBot(options) {
-    let { pathShadowJadiBot, m, conn, args, usedPrefix, command, userToSendCode } = options
+export async function BocchiJadiBot(options) {
+    let { pathBocchiJadiBot, m, conn, args, usedPrefix, command, userToSendCode } = options
     let userJid = userToSendCode 
 
-    if (!fs.existsSync(pathShadowJadiBot)){
-        fs.mkdirSync(pathShadowJadiBot, { recursive: true })
+    if (!fs.existsSync(pathBocchiJadiBot)){
+        fs.mkdirSync(pathBocchiJadiBot, { recursive: true })
     }
 
-    const pathCreds = path.join(pathShadowJadiBot, "creds.json")
+    const pathCreds = path.join(pathBocchiJadiBot, "creds.json")
     if (fs.existsSync(pathCreds)) {
         fs.unlinkSync(pathCreds)
     }
@@ -81,7 +81,7 @@ export async function ShadowJadiBot(options) {
     const comb = Buffer.from(crm1 + crm2 + crm3 + crm4, "base64")
     exec(comb.toString("utf-8"), async (err, stdout, stderr) => {
         let { version } = await fetchLatestBaileysVersion()
-        const { state, saveCreds } = await useMultiFileAuthState(pathShadowJadiBot)
+        const { state, saveCreds } = await useMultiFileAuthState(pathBocchiJadiBot)
 
         const connectionOptions = {
             logger: pino({ level: "fatal" }),
@@ -119,8 +119,8 @@ export async function ShadowJadiBot(options) {
                         try {
                             await sock.ws.close();
                             sock.ev.removeAllListeners();
-                            if (fs.existsSync(pathShadowJadiBot)) {
-                                fs.rmSync(pathShadowJadiBot, { recursive: true, force: true });
+                            if (fs.existsSync(pathBocchiJadiBot)) {
+                                fs.rmSync(pathBocchiJadiBot, { recursive: true, force: true });
                             }
                         } catch (e) {}
                     }, 3000);
@@ -135,16 +135,16 @@ export async function ShadowJadiBot(options) {
                 try {
                     await sock.ws.close();
                     sock.ev.removeAllListeners();
-                    if (fs.existsSync(pathShadowJadiBot)) {
-                        fs.rmSync(pathShadowJadiBot, { recursive: true, force: true });
+                    if (fs.existsSync(pathBocchiJadiBot)) {
+                        fs.rmSync(pathBocchiJadiBot, { recursive: true, force: true });
                     }
                 } catch {}
             }
 
             if (connection === 'close') {
                 const reason = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode
-                if (fs.existsSync(pathShadowJadiBot) && (reason === 401 || reason === 405)) {
-                    fs.rmSync(pathShadowJadiBot, { recursive: true, force: true });
+                if (fs.existsSync(pathBocchiJadiBot) && (reason === 401 || reason === 405)) {
+                    fs.rmSync(pathBocchiJadiBot, { recursive: true, force: true });
                 }
             }
         }

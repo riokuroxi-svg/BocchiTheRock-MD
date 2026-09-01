@@ -64,7 +64,7 @@ const handler = async (m, { conn, text, command }) => {
       {
         image: thumb,
         caption,
-        footer: "⚡ Shadow — Descargas en Documento ⚡",
+        footer: "⚡ Bocchi — Descargas en Documento ⚡",
         headerType: 4
       },
       { quoted: fkontak }
@@ -97,7 +97,7 @@ const downloadMedia = async (conn, m, url, type) => {
     if (!data?.result?.download_url) return m.reply("🚫 No se pudo descargar el archivo.")
 
     const fileUrl = data.result.download_url
-    const fileTitle = cleanName(data.result.title || "Shadow_File")
+    const fileTitle = cleanName(data.result.title || "Bocchi_File")
 
     const audioThumb = await fetch("https://i.ibb.co/7twWLLSw/ecba6992f3b1.jpg")
     const mini = Buffer.from(await audioThumb.arrayBuffer())

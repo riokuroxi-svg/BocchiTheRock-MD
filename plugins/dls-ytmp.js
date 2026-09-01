@@ -3,7 +3,7 @@ import fetch from "node-fetch"
 import { generateWAMessageContent, generateWAMessageFromContent, proto } from '@whiskeysockets/baileys'
 
 const handler = async (m, { conn, text, command, usedPrefix }) => {
-  if (!text) return m.reply(`💫 *Shadow invocando*\n\n🎶 Pronuncia el nombre del video o entrega el enlace de YouTube.`)
+  if (!text) return m.reply(`💫 *Bocchi invocando*\n\n🎶 Pronuncia el nombre del video o entrega el enlace de YouTube.`)
 
   const isDirectAudio = ["ytmp3"].includes(command)
   const isDirectVideo = ["playvid", "ytmp4", "play2"].includes(command)
@@ -94,7 +94,7 @@ const handler = async (m, { conn, text, command, usedPrefix }) => {
     }
 
   } catch (error) {
-    await m.reply(`❌ *Shadow — Error*\n\n${error.message}`)
+    await m.reply(`❌ *Bocchi — Error*\n\n${error.message}`)
     await m.react("⚠️")
   }
 }
@@ -102,7 +102,7 @@ const handler = async (m, { conn, text, command, usedPrefix }) => {
 const downloadMedia = async (conn, m, url, title, thumbnail, type) => {
   try {
     const cleanTitle = cleanName(title) + (type === "mp3" ? ".mp3" : ".mp4")
-    const msg = `🎶 *Shadow — Descarga en curso*\n\n✨ *Título:* ${title}\n🌌 Preparando tu ${type === "mp3" ? "audio..." : "video..."}`
+    const msg = `🎶 *Bocchi — Descarga en curso*\n\n✨ *Título:* ${title}\n🌌 Preparando tu ${type === "mp3" ? "audio..." : "video..."}`
     
     let sent = await conn.sendMessage(m.chat, { text: msg }, { quoted: m })
 
@@ -127,7 +127,7 @@ const downloadMedia = async (conn, m, url, title, thumbnail, type) => {
       }, { quoted: m })
 
       await conn.sendMessage(m.chat, {
-        text: `🎶 *Shadow — Operación completada*\n\n✨ *Título:* ${fileTitle}\n🌌 Entregada completa uwu.`,
+        text: `🎶 *Bocchi — Operación completada*\n\n✨ *Título:* ${fileTitle}\n🌌 Entregada completa uwu.`,
         edit: sent.key
       })
       await m.react("✅")
@@ -151,7 +151,7 @@ const downloadMedia = async (conn, m, url, title, thumbnail, type) => {
       contextInfo: {
         externalAdReply: {
           title: fileTitle,
-          body: "Shadow Ultra 💚",
+          body: "Bocchi Ultra 💚",
           thumbnailUrl: thumbnail,
           mediaType: 2,
           mediaUrl: url,
@@ -162,13 +162,13 @@ const downloadMedia = async (conn, m, url, title, thumbnail, type) => {
     }, { quoted: m })
 
     await conn.sendMessage(m.chat, {
-      text: `🎶 *Shadow — Operación completada*\n\n✨ *Título:* ${fileTitle}\n🌌 Entregada completa uwu.`,
+      text: `🎶 *Bocchi — Operación completada*\n\n✨ *Título:* ${fileTitle}\n🌌 Entregada completa uwu.`,
       edit: sent.key
     })
     await m.react("✅")
 
   } catch (error) {
-    await m.reply(`❌ *Shadow — Falla*\n\n${error.message}`)
+    await m.reply(`❌ *Bocchi — Falla*\n\n${error.message}`)
     await m.react("❌")
   }
 }

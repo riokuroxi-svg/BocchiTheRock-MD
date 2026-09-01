@@ -47,7 +47,7 @@ const handler = async (m, { conn }) => {
 
   try {
     chat.primaryBot = who
-    conn.reply(m.chat, `✰ *¡CONFIGURACIÓN ACTUALIZADA!* ✰\n\n➜ *Nuevo Shadow supremo:* @${who.split`@`[0]}\n> A partir de ahora, los comandos en este grupo serán ejecutados preferentemente por este * Shadow bot*.`, m, { mentions: [who] })
+    conn.reply(m.chat, `✰ *¡CONFIGURACIÓN ACTUALIZADA!* ✰\n\n➜ *Nuevo Bocchi supremo:* @${who.split`@`[0]}\n> A partir de ahora, los comandos en este grupo serán ejecutados preferentemente por este * Bocchi bot*.`, m, { mentions: [who] })
   } catch (e) {
     conn.reply(m.chat, `⚠︎ *Ocurrió un error inesperado:*\n> ${e.message}`, m)
   }

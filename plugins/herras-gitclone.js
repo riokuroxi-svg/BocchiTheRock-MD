@@ -21,7 +21,7 @@ const handler = async (m, { conn, usedPrefix, text }) => {
       zipBuffer = await zipRes.buffer()
       repos.push(repoData)
       // 🎄 Imagen temática navideña con estilo Bocchi Garden
-      image = 'https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/shadow-christmas.jpg'
+      image = 'https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/Bocchi-christmas.jpg'
     } else {
       const res = await fetch(`https://api.github.com/search/repositories?q=${encodeURIComponent(text)}`)
       const json = await res.json()
@@ -42,7 +42,7 @@ const handler = async (m, { conn, usedPrefix, text }) => {
 📜 Descripción: ${repo.description ? repo.description : 'Sin Descripción'}
 🔗 Enlace: ${repo.clone_url}`).join('\n────────────────────\n')
 
-    await conn.sendFile(m.chat, image, 'shadow_repo.jpg', `🌌 *Catálogo de las Sombras – Edición Navideña* 🎅\n\n${info.trim()}`, m)
+    await conn.sendFile(m.chat, image, 'Bocchi_repo.jpg', `🌌 *Catálogo de las Sombras – Edición Navideña* 🎅\n\n${info.trim()}`, m)
 
     if (zipBuffer && zipName) {
       await conn.sendFile(m.chat, zipBuffer, zipName, null, m)

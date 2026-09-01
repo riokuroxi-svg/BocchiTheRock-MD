@@ -60,8 +60,8 @@ let handler = async (m, { conn, args }) => {
           },
 
           externalAdReply: {
-            title: 'Shadow-BOT',
-            body: '𝘞𝘪𝘵𝘩 𝘓𝘰𝘷𝘦 𝘉𝘺 Yosue',
+            title: 'Bocchi-BOT',
+            body: '𝘞𝘪𝘵𝘩 𝘓𝘰𝘷𝘦 𝘉𝘺 Bocchi Dev',
             thumbnailUrl: d.profile_pic,
             mediaType: 1,
             renderLargerThumbnail: false,

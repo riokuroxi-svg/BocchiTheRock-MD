@@ -12,7 +12,7 @@ var handler = async (m, { conn, text, isMods }) => {
     if (messager.includes('ꕥ Actualizando.'))
       messager = '❀ Procesando, espere un momento mientras me actualizo.\n\n' + stdout.toString()
     
-    const updateThumb = await (await fetch('https://raw.githubusercontent.com/Andresv27728/dtbs/main/shadow.jpg')).buffer()
+    const updateThumb = await (await fetch('https://raw.githubusercontent.com/Andresv27728/dtbs/main/Bocchi.jpg')).buffer()
     
     await m.react('✔️')
     await conn.sendMessage(
@@ -22,7 +22,7 @@ var handler = async (m, { conn, text, isMods }) => {
         contextInfo: {
           externalAdReply: {
             showAdAttribution: true,
-            title: 'Shadow • Update BocchiTheRock-MD',
+            title: 'Bocchi • Update BocchiTheRock-MD',
             body: 'Actualización del bot',
             mediaType: 1,
             previewType: 0,
@@ -69,7 +69,7 @@ var handler = async (m, { conn, text, isMods }) => {
               contextInfo: {
                 externalAdReply: {
                   showAdAttribution: true,
-                  title: 'Shadow • Update Error',
+                  title: 'Bocchi • Update Error',
                   body: 'Conflictos detectados',
                   mediaType: 1,
                   previewType: 0,
@@ -92,7 +92,7 @@ var handler = async (m, { conn, text, isMods }) => {
         errorMessage2 += '\n⚠︎ Mensaje de error: ' + error.message
       }
       
-      const errorThumb = await (await fetch('https://raw.githubusercontent.com/Andresv27728/dtbs/main/shadow.jpg')).buffer()
+      const errorThumb = await (await fetch('https://raw.githubusercontent.com/Andresv27728/dtbs/main/Bocchi.jpg')).buffer()
       
       await conn.sendMessage(
         m.chat,
@@ -101,7 +101,7 @@ var handler = async (m, { conn, text, isMods }) => {
           contextInfo: {
             externalAdReply: {
               showAdAttribution: true,
-              title: 'Shadow • Update Error',
+              title: 'Bocchi • Update Error',
               body: 'Error inesperado',
               mediaType: 1,
               previewType: 0,

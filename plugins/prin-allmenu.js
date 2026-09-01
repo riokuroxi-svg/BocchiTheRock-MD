@@ -7,7 +7,7 @@ import moment from 'moment-timezone'
 const botname = global.botname || "Bocchi Garden"
 const dev = global.dev || "Cid Kagenou"
 const banner = global.banner || "https://raw.githubusercontent.com/riokuroxi-svg/BocchiTheRock-MD/refs/heads/main/G9i8jTSWgAAppEQ.jpg"
-const channelRD = global.channelRD || { id: "0@newsletter", name: "Shadow Channel" }
+const channelRD = global.channelRD || { id: "0@newsletter", name: "Bocchi Channel" }
 
 let handler = async (m, { conn, usedPrefix, __dirname, participants }) => {
   let mentionedJid = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
@@ -80,7 +80,7 @@ ${comandos}
 > Ya estaba escuchando tus pasos...
 
 > ⚜︎ — INFO SHADOW BOT
-> • Nombre clave: ${conn.user?.name || 'Shadow Unit'}
+> • Nombre clave: ${conn.user?.name || 'Bocchi Unit'}
 > • Clasificación: ${(conn.user.jid == global.conn.user.jid ? 'Núcleo Principal' : 'Unidad Subordinada')}
 > • Comandos: ${totalCommands}
 > • Tiempo activo: ${uptime}
@@ -98,19 +98,19 @@ ${readMore}
     ]
     let icons = icon[Math.floor(Math.random() * icon.length)]
 
-    let Shadow_url = null
+    let Bocchi_url = null
     try {
       const ctrl = new AbortController()
       const t = setTimeout(() => ctrl.abort(), 4000)
       let resIcon = await fetch(banner, { signal: ctrl.signal })
       if (resIcon.ok) {
-        Shadow_url = await resIcon.buffer()
+        Bocchi_url = await resIcon.buffer()
       } else {
         throw new Error()
       }
       clearTimeout(t)
     } catch {
-      Shadow_url = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64')
+      Bocchi_url = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64')
     }
 
     const fkontak = {
@@ -118,7 +118,7 @@ ${readMore}
       message: {
         productMessage: {
           product: {
-            productImage: { mimetype: "image/jpeg", jpegThumbnail: Shadow_url },
+            productImage: { mimetype: "image/jpeg", jpegThumbnail: Bocchi_url },
             title: `Menú de la Sombra - ${botname}`,
             description: "« Soy quien actúa en las sombras, fingiendo ser un simple extra. »",
             currencyCode: "USD",
